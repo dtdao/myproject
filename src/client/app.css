@@ -1,8 +1,19 @@
-h1 {
-  color: green;
+
+a{
+	color: black
+}
+a:link, a:active, a:visited {
+	text-decoration: none
 }
 
-body {
-  text-align: center;
-  margin: auto;
+a:hover {
+	text-decoration: none;
+	color: black
+}
+
+#mylogo {
+	float: left;
+	margin: 10px;
+	width: 300px;
+	height: 300px;
 }
