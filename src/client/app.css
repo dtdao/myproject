@@ -1,19 +1,31 @@
 
-a{
-	color: black
-}
-a:link, a:active, a:visited {
+a, a:link, a:active, a:visited, a:hover {
+	color: black;
 	text-decoration: none
 }
-
-a:hover {
-	text-decoration: none;
-	color: black
+.nav-item{
+	margin-right: 10px
 }
+.link-text{
+	font-size: 20px
+}
+.icon-link {
+	margin: 5px
+}
+
+#greeting {
+	color: gray;
+}
+
 
 #mylogo {
 	float: left;
 	margin: 10px;
 	width: 300px;
 	height: 300px;
+}
+
+.jumbotron {
+
+	background-color: transparent !important;
 }

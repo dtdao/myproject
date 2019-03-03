@@ -1,0 +1,16 @@
+div.well{
+	width: 500px;
+	height: 370px;
+	margin-top: 100px;
+	margin-bottom: 100px;
+	background-color: white;
+	box-shadow: 5px 4px 10px black;
+}
+
+h1#calc-field{
+	width: 480px;
+	text-align: right;
+	background-color: white;
+	box-shadow: 2px 3px 3px gray;
+	margin: 10px
+}
