@@ -1,16 +1,40 @@
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+
 div.well{
 	width: 500px;
 	height: 370px;
+	padding: 10px;
 	margin-top: 100px;
 	margin-bottom: 100px;
 	background-color: white;
 	box-shadow: 5px 4px 10px black;
+	font-family: 'Indie Flower', cursive;
+	font-size: 25px;
 }
 
-h1#calc-field{
-	width: 480px;
+#calc-field{
+	width: 470px;
 	text-align: right;
 	background-color: white;
-	box-shadow: 2px 3px 3px gray;
+	border-color: black;
 	margin: 10px
+}
+
+button.btn.btn-primary {
+	color: black;
+	display: block;
+	padding: 0px;
+	background-color: white;
+	border-color: black;
+	font-family: 'Indie Flower', cursive;
+	font-size: 25px;
+	width: 100%;
+}
+
+.btn.btn-primary:hover{
+	background-color: gray;
+}
+.btn.btn-primary:focus{
+	background-color: gray;
+	border-color: black;
 }
