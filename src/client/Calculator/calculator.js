@@ -19,9 +19,11 @@ const GenerateKeys = (props) => {
 	return buttons
 }
 
-const calculate = (val1, val2, symbol) => {
-	console.log(eval(val1+symbol+val2))
-	return val1+symbol+val2
+const calculate = (modVal, storedVal, symbol) => {
+	// console.log(eval(val1+symbol+val2))
+	// val1 is store value and val2 = mod value
+	console.log(storedVal, modVal)
+	return eval(`${storedVal}${(symbol == "\u00F7" ? "/" : symbol)}${modVal}`)
 }
 
 export default class Calculator extends Component {
@@ -30,6 +32,7 @@ export default class Calculator extends Component {
 		this.state = {
 			display_value: 0,
 			stored_value: 0,
+			mod_value: 0,
 			button_val: "",
 			// \u00F7 is division key
 			first_row: ['CE','C','DELETE','\u00F7'],
@@ -50,35 +53,60 @@ export default class Calculator extends Component {
 	handleClick = (event) =>{
 		if(Number(event.target.value) || event.target.value == 0){
 			console.log(event.target.value)
+			if(!this.state.button_val){
+				this.setState({
+					display_value: 0
+				})
+			}
 			this.setState({
-				display_value: this.state.display_value + event.target.value
+				display_value: parseInt(this.state.display_value + event.target.value)
 			})
 		}
 		else {
+			// Clear everything
 			if(event.target.value == "C"){
 				this.setState({
 					display_value: 0,
-					stored_value: 0
+					stored_value: 0,
+					mod_value: 0,
+					button_val: ""
 				})
 			}
+			//Clear current display value
 			else if(event.target.value == "CE"){
 				this.setState({
 					display_value:0
 				})
 			}
-			else if(event.target.value == "\u003D"){
-				let total = calculate(parseInt(this.state.stored_value), parseInt(this.state.display_value), this.state.button_val)
+			//Delete the laste entered digit or do nothing if value is Zero
+			else if(event.target.value == "DELETE" && this.state.display_value > 0){
+				let holder = this.state.display_value.toString().split("")
+				holder.pop()
 				this.setState({
-					display_value: total
+					display_value: parseInt(holder.join(""))
+				})
+			}
+			//Handles the solving euqal
+			else if(event.target.value == "\u003D"){
+				// console.log({val: this.state.display_value, val2: this.state.stored_value, mathop: this.state.button_val})
+				// let total = calculate(parseInt(this.state.mod_value), parseInt(this.state.display_value), this.state.button_val)
+				// console.log(total)
+				this.setState({
+					mod_value: this.state.display_value
 				})	
+				console.log({stored_value: this.state.stored_value, mod_value: this.state.mod_value})
+			}
+			else if(event.target.value == "\u00B1" && this.display_value != 0){
+				this.setState({
+					display_value: (this.state.display_value > 0 ? -Math.abs(this.state.display_value) : Math.abs(this.state.display_value))
+				})
 			}
 			else {
 				this.setState({
-					stored_value: this.state.display_value,
+					stored_value: parseInt(this.state.display_value),
 					display_value: 0,
 					button_val: event.target.value
 				})
-
 			}
 		}
 		// let holder = this.state.display_value

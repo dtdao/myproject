@@ -30,11 +30,12 @@ button.btn.btn-primary {
 	font-size: 25px;
 	width: 100%;
 }
-
-.btn.btn-primary:hover{
-	background-color: gray;
-}
-.btn.btn-primary:focus{
+.btn.btn-primary:active:focus, .btn.btn-primary:hover{
 	background-color: gray;
 	border-color: black;
+	outline: none;
+}
+
+.btn.btn-primary:active {
+	outline:  none;
 }
