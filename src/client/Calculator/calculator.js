@@ -23,7 +23,11 @@ const calculate = (modVal, storedVal, symbol) => {
 	// console.log(eval(val1+symbol+val2))
 	// val1 is store value and val2 = mod value
 	console.log(storedVal, modVal)
-	return eval(`${storedVal}${(symbol == "\u00F7" ? "/" : symbol)}${modVal}`)
+	if (symbol == "\u00F7") return storedVal/modVal
+	else if(symbol == "\u002A") return storedVal * modVal
+	else if(symbol == "\u002D") return storedVal - modVal
+	else if(symbol == "\u002B") return storedVal + modVal
+	else return modVal
 }
 
 export default class Calculator extends Component {
@@ -51,16 +55,13 @@ export default class Calculator extends Component {
 
 
 	handleClick = (event) =>{
+		let mathOperators = ["\u00F7", "\u002A", "\u002D", "\u002B"]
 		if(Number(event.target.value) || event.target.value == 0){
-			console.log(event.target.value)
-			if(!this.state.button_val){
-				this.setState({
-					display_value: 0
-				})
-			}
+			this.state.display_value += event.target.value
 			this.setState({
-				display_value: parseInt(this.state.display_value + event.target.value)
+				display_value: this.state.display_value
 			})
+		// console.log({stored_value: this.state.stored_value, mod_value: this.state.mod_value})
 		}
 		else {
 			// Clear everything
@@ -83,16 +84,29 @@ export default class Calculator extends Component {
 				let holder = this.state.display_value.toString().split("")
 				holder.pop()
 				this.setState({
-					display_value: parseInt(holder.join(""))
+					display_value: parseFloat(holder.join(""))
 				})
 			}
-			//Handles the solving euqal
-			else if(event.target.value == "\u003D"){
-				// console.log({val: this.state.display_value, val2: this.state.stored_value, mathop: this.state.button_val})
-				// let total = calculate(parseInt(this.state.mod_value), parseInt(this.state.display_value), this.state.button_val)
-				// console.log(total)
+			// This handle all math operations
+			else if(mathOperators.includes(event.target.value)){
 				this.setState({
-					mod_value: this.state.display_value
+					stored_value: parseFloat(this.state.display_value + this.state.stored_value), 
+					button_val: event.target.value
+				}, () => {
+					this.state.display_value = 0
+					console.log("Math Operator pushed and value stored")
+				})
+			}
+			//Handles the solving euqal \u003D is the (=) sign
+			else if(event.target.value == "\u003D"){
+				if(!this.state.mod_value){
+					this.state.mod_value = parseFloat(this.state.display_value)
+				}
+				let total = calculate(parseFloat(this.state.mod_value), parseFloat(this.state.stored_value), this.state.button_val)
+				console.log(`answer is : ${total}`)
+				this.setState({
+					display_value: total,
+					stored_value: total
 				})	
 				console.log({stored_value: this.state.stored_value, mod_value: this.state.mod_value})
 			}
@@ -103,16 +117,12 @@ export default class Calculator extends Component {
 			}
 			else {
 				this.setState({
-					stored_value: parseInt(this.state.display_value),
+					stored_value: parseFloat(this.state.display_value),
 					display_value: 0,
 					button_val: event.target.value
 				})
 			}
 		}
-		// let holder = this.state.display_value
-		// this.setState({
-		// 	display_value: holder + event.target.innerHTML
-		// })
 	}
 
 	render(){
@@ -144,5 +154,4 @@ export default class Calculator extends Component {
 				</div>
 			)
 	}	
-
 }
