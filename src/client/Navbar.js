@@ -22,11 +22,11 @@ export default class NavigationBar extends Component {
 							</NavLink>
 							<div className="dropdown-menu">
 								<NavLink to="/app1" className="dropdown-item"><span className="link-text">CALCULATOR</span></NavLink>
-								<NavLink to="/app1" className="dropdown-item"><span className="link-text">PLACEHOLDER</span></NavLink>
-								<NavLink to="/app1" className="dropdown-item"><span className="link-text">PLACEHOLDER</span></NavLink>
-								<NavLink to="/app1" className="dropdown-item"><span className="link-text">PLACEHOLDER</span></NavLink>
-								<NavLink to="/app1" className="dropdown-item"><span className="link-text">PLACEHOLDER</span></NavLink>
-								<NavLink to="/app1" className="dropdown-item"><span className="link-text">PLACEHOLDER</span></NavLink>
+								<NavLink to="#" className="dropdown-item"><span className="link-text">PLACEHOLDER</span></NavLink>
+								<NavLink to="#" className="dropdown-item"><span className="link-text">PLACEHOLDER</span></NavLink>
+								<NavLink to="#" className="dropdown-item"><span className="link-text">PLACEHOLDER</span></NavLink>
+								<NavLink to="#" className="dropdown-item"><span className="link-text">PLACEHOLDER</span></NavLink>
+								<NavLink to="#" className="dropdown-item"><span className="link-text">PLACEHOLDER</span></NavLink>
 							</div>
 						</li>
 						<li className="nav-item"><NavLink to="/about"><span className="link-text">ABOUT</span></NavLink></li>

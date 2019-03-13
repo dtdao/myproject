@@ -22,10 +22,13 @@ const GenerateKeys = (props) => {
 const calculate = (modVal, storedVal, symbol) => {
 	// console.log(eval(val1+symbol+val2))
 	// val1 is store value and val2 = mod value
-	console.log(storedVal, modVal)
-	if (symbol == "\u00F7") return storedVal/modVal
-	else if(symbol == "\u002A") return storedVal * modVal
-	else if(symbol == "\u002D") return storedVal - modVal
+	console.log(storedVal, symbol, modVal)
+	if (symbol == "\u00F7" && storedVal != 0 && modVal != 0) return storedVal/modVal
+	else if(symbol == "\u002A" && storedVal != 0 && modVal != 0) return storedVal * modVal
+	else if(symbol == "\u002D" && storedVal !=0 && modVal != 0) { 
+		console.log(storedVal - modVal) 
+		return storedVal - modVal
+	}
 	else if(symbol == "\u002B") return storedVal + modVal
 	else return modVal
 }
@@ -34,7 +37,7 @@ export default class Calculator extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			display_value: 0,
+			display_value: "0",
 			stored_value: 0,
 			mod_value: 0,
 			button_val: "",
@@ -60,8 +63,9 @@ export default class Calculator extends Component {
 			this.state.display_value += event.target.value
 			this.setState({
 				display_value: this.state.display_value
+			}, () => {
+				console.log({stored_value: this.state.stored_value, mod_value: this.state.mod_value, display: this.state.display_value})
 			})
-		// console.log({stored_value: this.state.stored_value, mod_value: this.state.mod_value})
 		}
 		else {
 			// Clear everything
@@ -89,13 +93,25 @@ export default class Calculator extends Component {
 			}
 			// This handle all math operations
 			else if(mathOperators.includes(event.target.value)){
-				this.setState({
-					stored_value: parseFloat(this.state.display_value + this.state.stored_value), 
-					button_val: event.target.value
-				}, () => {
+				// let total = calculate(parseFloat(this.state.stored_value), parseFloat(this.state.display_value), this.state.button_val)
+				if (this.state.button_val == ""){
+					this.setState({
+						stored_value: this.state.display_value,
+						button_val: event.target.value,
+					})
 					this.state.display_value = 0
-					console.log("Math Operator pushed and value stored")
-				})
+				}
+				else {
+					let total = calculate(parseFloat(this.state.display_value), parseFloat(this.state.stored_value), this.state.button_val)
+					this.setState({
+						stored_value: total, 
+						display_value: total,
+						button_val: event.target.value
+					}, () => {
+						this.state.display_value = 0
+						console.log("Math Operator pushed and value stored")
+					})
+				}
 			}
 			//Handles the solving euqal \u003D is the (=) sign
 			else if(event.target.value == "\u003D"){
@@ -108,11 +124,31 @@ export default class Calculator extends Component {
 					display_value: total,
 					stored_value: total
 				})	
-				console.log({stored_value: this.state.stored_value, mod_value: this.state.mod_value})
+				console.log({stored_value: this.state.stored_value, mod_value: this.state.mod_value, display: this.state.display_value})
 			}
-			else if(event.target.value == "\u00B1" && this.display_value != 0){
+			else if(event.target.value == "\u00B1"){
+				console.log("plus minus button pushed")
+				console.log(this.state.stored_value)
+				let oppposite
+				if (this.state.display_value == 0){
+					oppposite = (parseFloat(this.state.stored_value)> 0 ? -Math.abs(this.state.stored_value) : Math.abs(this.state.stored_value))
+
+				}
+				else {
+					oppposite = (parseFloat(this.state.display_value)> 0 ? -Math.abs(this.state.display_value) : Math.abs(this.state.display_value))
+				}
+				console.log({oppposite: oppposite})
 				this.setState({
-					display_value: (this.state.display_value > 0 ? -Math.abs(this.state.display_value) : Math.abs(this.state.display_value))
+					display_value: oppposite
+				})
+			}
+			//This set a dot.
+			else if (event.target.value == "\u002E"){
+				if(this.state.display_value.includes(".")){
+					return null
+				}
+				this.setState({
+					display_value: this.state.display_value + "."
 				})
 			}
 			else {
