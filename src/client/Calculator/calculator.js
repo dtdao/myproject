@@ -23,13 +23,18 @@ const calculate = (modVal, storedVal, symbol) => {
 	// console.log(eval(val1+symbol+val2))
 	// val1 is store value and val2 = mod value
 	console.log(storedVal, symbol, modVal)
-	if (symbol == "\u00F7" && storedVal != 0 && modVal != 0) return storedVal/modVal
-	else if(symbol == "\u002A" && storedVal != 0 && modVal != 0) return storedVal * modVal
-	else if(symbol == "\u002D" && storedVal !=0 && modVal != 0) { 
-		console.log(storedVal - modVal) 
-		return storedVal - modVal
+	if (symbol == "\u00F7" && storedVal != 0 && modVal != 0){ 
+		return storedVal/modVal
 	}
-	else if(symbol == "\u002B") return storedVal + modVal
+	else if(symbol == "\u002A"){
+	 	return storedVal * modVal
+	}
+	else if(symbol == "\u002D") { 
+		return (storedVal - modVal)
+	}
+	else if(symbol == "\u002B"){
+		return storedVal + modVal
+	}
 	else return modVal
 }
 
@@ -88,47 +93,33 @@ export default class Calculator extends Component {
 				let holder = this.state.display_value.toString().split("")
 				holder.pop()
 				this.setState({
-					display_value: parseFloat(holder.join(""))
+					display_value: holder.join("")
 				})
 			}
 			// This handle all math operations
 			else if(mathOperators.includes(event.target.value)){
 				// let total = calculate(parseFloat(this.state.stored_value), parseFloat(this.state.display_value), this.state.button_val)
-				if (this.state.button_val == ""){
+				this.setState({
+					stored_value: parseFloat(this.state.display_value),
+					button_val: event.target.value,
+				})
+				if(this.state.mod_value){
 					this.setState({
-						stored_value: this.state.display_value,
-						button_val: event.target.value,
+						mod_value: 0
 					})
+				}
+				if(this.state.mod_value == 0 && this.state.button_val != ""){
+					let tempCal = calculate(parseFloat(this.state.display_value), parseFloat(this.state.stored_value), this.state.button_val)
+					this.setState({
+						stored_value: tempCal,
+						display_value: 0
+					})
+				}else {
 					this.state.display_value = 0
 				}
-				else {
-					let total = calculate(parseFloat(this.state.display_value), parseFloat(this.state.stored_value), this.state.button_val)
-					this.setState({
-						stored_value: total, 
-						display_value: total,
-						button_val: event.target.value
-					}, () => {
-						this.state.display_value = 0
-						console.log("Math Operator pushed and value stored")
-					})
-				}
-			}
-			//Handles the solving euqal \u003D is the (=) sign
-			else if(event.target.value == "\u003D"){
-				if(!this.state.mod_value){
-					this.state.mod_value = parseFloat(this.state.display_value)
-				}
-				let total = calculate(parseFloat(this.state.mod_value), parseFloat(this.state.stored_value), this.state.button_val)
-				console.log(`answer is : ${total}`)
-				this.setState({
-					display_value: total,
-					stored_value: total
-				})	
-				console.log({stored_value: this.state.stored_value, mod_value: this.state.mod_value, display: this.state.display_value})
+
 			}
 			else if(event.target.value == "\u00B1"){
-				console.log("plus minus button pushed")
-				console.log(this.state.stored_value)
 				let oppposite
 				if (this.state.display_value == 0){
 					oppposite = (parseFloat(this.state.stored_value)> 0 ? -Math.abs(this.state.stored_value) : Math.abs(this.state.stored_value))
@@ -137,11 +128,11 @@ export default class Calculator extends Component {
 				else {
 					oppposite = (parseFloat(this.state.display_value)> 0 ? -Math.abs(this.state.display_value) : Math.abs(this.state.display_value))
 				}
-				console.log({oppposite: oppposite})
 				this.setState({
 					display_value: oppposite
 				})
 			}
+
 			//This set a dot.
 			else if (event.target.value == "\u002E"){
 				if(this.state.display_value.includes(".")){
@@ -150,6 +141,21 @@ export default class Calculator extends Component {
 				this.setState({
 					display_value: this.state.display_value + "."
 				})
+			}
+
+			//Handles the solving euqal \u003D is the (=) sign
+			else if(event.target.value == "\u003D"){
+				if(!this.state.mod_value){
+					this.state.mod_value = parseFloat(this.state.display_value)
+				}
+				let total = calculate(parseFloat(this.state.mod_value), parseFloat(this.state.stored_value), this.state.button_val)
+				console.log(`answer is : ${total}`)
+				this.setState({
+					display_value: total + "",
+					stored_value: total
+				}, function(){
+					console.log({stored_value: this.state.stored_value, mod_value: this.state.mod_value, display: this.state.display_value})
+				})	
 			}
 			else {
 				this.setState({
