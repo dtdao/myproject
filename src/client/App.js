@@ -6,6 +6,7 @@ import NavigationBar from './Navbar.js'
 import Contact from './Contact.js'
 import Home from './Home.js'
 import Calculator from './Calculator/calculator'
+import WorkoutTracker from './personal_workout_tracker/workout_app'
 
 // This will be where I wil load all the project that i will code up to insert to the app
 
@@ -28,7 +29,8 @@ export default class App extends Component {
               // Using excat key word makes the components switch accurately
                <Route exact path="/" component={Home} />
                <Route exact path="/about" component={About} />
-               <Route exact path="/app1" component={Calculator} />
+               <Route exact path="/calculator" component={Calculator} />
+               <Route exact path="/workout" component={WorkoutTracker} />
                <Route exact path="/project/:apps" component={Projects} />
                <Route exact component={NoMatch} />
             </Switch>

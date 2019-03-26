@@ -21,8 +21,8 @@ export default class NavigationBar extends Component {
 							<span className="link-text">PROJECTS</span>
 							</NavLink>
 							<div className="dropdown-menu">
-								<NavLink to="/app1" className="dropdown-item"><span className="link-text">CALCULATOR</span></NavLink>
-								<NavLink to="#" className="dropdown-item"><span className="link-text">PLACEHOLDER</span></NavLink>
+								<NavLink to="/calculator" className="dropdown-item"><span className="link-text">CALCULATOR</span></NavLink>
+								<NavLink to="/workout" className="dropdown-item"><span className="link-text">WORKOUT TRACKER</span></NavLink>
 								<NavLink to="#" className="dropdown-item"><span className="link-text">PLACEHOLDER</span></NavLink>
 								<NavLink to="#" className="dropdown-item"><span className="link-text">PLACEHOLDER</span></NavLink>
 								<NavLink to="#" className="dropdown-item"><span className="link-text">PLACEHOLDER</span></NavLink>
