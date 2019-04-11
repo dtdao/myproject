@@ -11,7 +11,11 @@ export default class WorkoutTracker extends Component {
 		return(
 			<div className="container">
 				<div className="row justify-content-md-center">
-					<WorkoutForm />
+				<WorkoutForm />
+
+					<div className="row justify-content-md-center">
+						<h1>Data area under construction</h1>
+					</div>
 				</div>
 			</div>
 		)

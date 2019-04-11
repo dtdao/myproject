@@ -1,9 +1,9 @@
 button.btn.btn-primary {
 	background: #467F85;
-	width: auto;
+	width: 70px;
 	height: 40px;
 	margin-top: 30px;
 	margin-right: 100px;
-	padding: 5px;
 	font-family: arial;
+
 }
