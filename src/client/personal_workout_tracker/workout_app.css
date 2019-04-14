@@ -1,9 +1,8 @@
-button.btn.btn-primary {
+#exerciseSubmitBtn  {
 	background: #467F85;
 	width: 70px;
 	height: 40px;
 	margin-top: 30px;
 	margin-right: 100px;
-	font-family: arial;
-
+	font-family: arial ;
 }

@@ -1,10 +1,14 @@
 const express = require('express');
 const router = express.Router();
+const exerciseCtrl = require("../controllers/exercise.js")
 
-router.post('/workout/new', (req, res) => {
+var sendJsonResponse = function(res, status, content) {
+	res.status(status);
+	res.json(content);
+};
 
-	alert("hello world")
-})
+router.post("/exercise/new", exerciseCtrl.addNewExercise)
+router.get("/exercise", exerciseCtrl.exerciseQuery)
 
 module.exports = router
 

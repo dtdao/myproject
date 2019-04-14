@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Indie+Flower');
 
-div.well{
+#calcWell{
 	width: 500px;
 	height: 370px;
 	padding: 10px;
@@ -20,7 +20,7 @@ div.well{
 	margin: 10px
 }
 
-button.btn.btn-primary {
+.calcButton {
 	color: black;
 	display: block;
 	padding: 0px;
@@ -30,12 +30,12 @@ button.btn.btn-primary {
 	font-size: 25px;
 	width: 100%;
 }
-.btn.btn-primary:active:focus, .btn.btn-primary:hover{
+.calcButton:active:focus, .calcButton:hover{
 	background-color: gray;
 	border-color: black;
 	outline: none;
 }
 
-.btn.btn-primary:active {
+.calcButton:active {
 	outline:  none;
 }

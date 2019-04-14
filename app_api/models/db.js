@@ -1,9 +1,13 @@
 const mongoose = require('mongoose');
 let gracefulShutdown;
-var dbURI = 'mongodb://localhost/ExerciseTracker';
+const dbURI = 'mongodb://localhost/ExerciseTracker';
 if (process.env.NODE_ENV === 'production') {
     dbURI = process.env.MONGOLAB_URI;
 }
+
+
+//MAKE SURE TO CONNECT TO THE MONGO!!!!!!
+mongoose.connect(dbURI)
 
 // CONNECTION EVENTS
 mongoose.connection.on('connected', function() {
@@ -19,7 +23,7 @@ mongoose.connection.on('disconnected', function() {
 
 // CAPTURE APP TERMINATION / RESTART EVENTS
 // To be called when process is restarted or terminated
-gracefulShutdown = function(msg, callback) {
+gracefulShutdown = (msg, callback) => {
     mongoose.connection.close(function() {
         console.log('Mongoose disconnected through ' + msg);
         callback();
@@ -43,3 +47,5 @@ process.on('SIGTERM', function() {
         process.exit(0);
     });
 });
+//Bring in the model
+require("./exercise.js")

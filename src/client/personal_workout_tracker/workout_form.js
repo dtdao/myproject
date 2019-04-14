@@ -22,8 +22,11 @@ export default class WorkoutForm extends Component {
 
 	handleSubmit(event){
 		event.preventDefault();
-		const data = new FormData(this.state);
-		console.log(data);
+		fetch("/api/exercise/new", {
+			method: "post",
+			headers: {"Content-Type": "application/json"},
+			body: JSON.stringify(this.state)
+		})
 
 	}
 
@@ -53,7 +56,7 @@ export default class WorkoutForm extends Component {
 								<label htmlFor="inputReps">Reps</label>
 								<input type="number" min="1" className="form-control" id="inputReps" name="reps" onChange={this.handleChange} />
 							</div>
-						<button type="submit" className="border border-primary btn btn-primary mb-2">Add</button>
+						<button type="submit" id="exerciseSubmitBtn" className="btn btn-primary mb-2">Add</button>
 						</div>
 					</form>
 			</div>

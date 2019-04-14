@@ -14,7 +14,7 @@ const GenerateKeys = (props) => {
 	let buttons = []
 	for (let i = 0; i < props.value.length; i++ ) {
 		buttons.push(
-				<button type="button" value={props.value[i]} key={props.value[i]} className="btn btn-primary" onClick={props.click}>{props.value[i]}</button>)
+				<button type="button" value={props.value[i]} key={props.value[i]} className="calcButton btn btn-primary" onClick={props.click}>{props.value[i]}</button>)
 	}
 	return buttons
 }
@@ -172,7 +172,7 @@ export default class Calculator extends Component {
 		return(
 				<div className="container">
 					<div className="row justify-content-md-center">
-						<div className="well">
+						<div className="well" id="calcWell">
 							<div className="col-xs-6 col-xs-offset-3">
 								<DisplayMessage display={display_value} />
 								<div className="btn-group btn-block">

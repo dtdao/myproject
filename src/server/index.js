@@ -1,8 +1,11 @@
 const express = require('express');
 const os = require('os');
 const router = express.Router()
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+require("../../app_api/models/db")
 const app = express();
-let routesApi = require('../../app_api/routes/index')
+const routesApi = require('../../app_api/routes/index')
 
 let sendJSONresponse = function(res, status, content) {
   console.log('hello world')
@@ -10,12 +13,17 @@ let sendJSONresponse = function(res, status, content) {
   res.json(content);
 };
 
-app.use(express.static('dist'));
-app.use('/api', routesApi)
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(cookieParser())
 
+app.use(express.static('dist'));
+
+app.use('/api', routesApi)
 app.get('*', function(req, res){
 	res.redirect("/")
 })
+
 
 app.listen(process.env.PORT || 8080, () => console.log(`Listening on port ${process.env.PORT || 8080}!`));
 
