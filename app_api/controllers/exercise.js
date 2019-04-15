@@ -7,9 +7,8 @@ let sendJSONresponse = function(res, status, content) {
 };
 
 module.exports.addNewExercise = (req, res) => {
-	console.log(req.body)
 	Exercise.create({
-		date: req.body.date,
+		date: req.body.date instanceof Date ? req.body.date : new Date(),
 		exercise: req.body.exercise,
 		weight: req.body.weight,
 		sets: req.body.sets,
@@ -27,5 +26,7 @@ module.exports.addNewExercise = (req, res) => {
 }
 
 module.exports.exerciseQuery = (req, res) => {
-	sendJSONresponse(res, 200, {message: "This should work"})
+	Exercise.find({}, (err, data) => { 
+		res.json(data)
+	})
 }
