@@ -19,14 +19,16 @@ module.exports.addNewExercise = (req, res) => {
 			sendJSONresponse(res, 400, err)
 		}
 		else {
-			console.log(exercise)
 			sendJSONresponse(res, 201, exercise)
 		}
 	})
 }
 
 module.exports.exerciseQuery = (req, res) => {
-	Exercise.find({}, (err, data) => { 
+	Exercise.find({}, function(err, data) { 
+		if(err){
+			console.log(err)
+		}
 		res.json(data)
 	})
 }

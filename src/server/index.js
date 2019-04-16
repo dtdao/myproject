@@ -8,7 +8,6 @@ const app = express();
 const routesApi = require('../../app_api/routes/index')
 
 let sendJSONresponse = function(res, status, content) {
-  console.log('hello world')
   res.status(status);
   res.json(content);
 };

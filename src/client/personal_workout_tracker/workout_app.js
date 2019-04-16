@@ -6,17 +6,17 @@ import "./workout_app.css"
 export default class WorkoutTracker extends Component {
 	constructor(props){
 		super(props)
-		this.state = { data: null }
+		this.state = { data: "test" }
+		this.loadData = this.loadData.bind(this)
 	}
 
 	loadData() {
 		console.log("Loading Data");
 		fetch("/api/exercise/")
-			.then(response => {
-				response.json()
+			.then(res => {
+				return res.json()
 			})
 			.then(data => {
-				// console.log(data)
 				this.setState({data})
 			})
 			.catch(err => console.log(err))
@@ -28,18 +28,19 @@ export default class WorkoutTracker extends Component {
 	}
 
 	componentDidUpdate(prevState){
-		console.log(this.state.data)
+		// this.loadData()
 	}
 
 
 	render(){
+		const {data} = this.state
 		return(
 			<div className="container">
 				<div className="row justify-content-md-center">
 					<WorkoutForm />
 				</div>
 				<div className="row justify-content-sm-center">
-					<WorkoutDisplay value={this.state.data}/>
+					<WorkoutDisplay data={data}/>
 				</div>
 			</div>
 		)

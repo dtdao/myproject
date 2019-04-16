@@ -1,15 +1,38 @@
 import React, { Component } from 'react';
 
-const generateData = (props) =>{ 
+const GenerateData = (props) =>{ 
 
+	return(
+		<tr>
+			<th scrope="row">{props.date}</th>
+			<td>{props.exercise}</td>
+			<td>{props.weight}</td>
+			<td>{props.sets}</td>
+			<td>{props.reps}</td>
+		</tr>
+	)
+}
+
+const GenerateRow = (props) => {
+	let data = [];
+	for(let i = 0; i < props.data.length; i++){
+		console.log(props.data[i].date)
+		data.push(
+				<GenerateData key={i} data={props.data[i]}/>
+			)
+	}
+	return data
 }
 
 export default class WorkoutDisplay extends Component {
 	constructor(props){
 		super(props)
+		// this.state = {data: null}
+		// this.loadData = this.loadData.bind(this)
 	}
 
 	render(){
+		let data = this.props.data
 		return(
 			<div className="container">
 				<h1 className="text-center">History</h1>
@@ -24,13 +47,7 @@ export default class WorkoutDisplay extends Component {
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<th scope="row"> test date</th>
-							<td>test exercise</td>
-							<td>Test weight</td>
-							<td>Test sets</td>
-							<td>Test reps</td>
-						</tr>
+						<GenerateRow data={this.props.data}/>
 					</tbody>
 				</table>
 			</div>
