@@ -6,7 +6,7 @@ import "./workout_app.css"
 export default class WorkoutTracker extends Component {
 	constructor(props){
 		super(props)
-		this.state = { data: "test" }
+		this.state = { data: "", reload: false}
 		this.loadData = this.loadData.bind(this)
 	}
 
@@ -17,7 +17,7 @@ export default class WorkoutTracker extends Component {
 				return res.json()
 			})
 			.then(data => {
-				this.setState({data})
+				this.setState({data: data})
 			})
 			.catch(err => console.log(err))
 	}
@@ -28,16 +28,20 @@ export default class WorkoutTracker extends Component {
 	}
 
 	componentDidUpdate(prevState){
-		// this.loadData()
+		if(this.state.reload == true){
+			this.loadData()
+			this.setState({reload: false})
+		}
 	}
 
 
 	render(){
+		// This is something interesting shit in workoutform.  parent rerender form child by using a callback.
 		const {data} = this.state
 		return(
 			<div className="container">
 				<div className="row justify-content-md-center">
-					<WorkoutForm />
+					<WorkoutForm update={bool =>{this.setState({reload: bool})}}/>
 				</div>
 				<div className="row justify-content-sm-center">
 					<WorkoutDisplay data={data}/>

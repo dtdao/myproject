@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 
 const GenerateData = (props) =>{ 
-
 	return(
 		<tr>
-			<th scrope="row">{props.date}</th>
-			<td>{props.exercise}</td>
-			<td>{props.weight}</td>
-			<td>{props.sets}</td>
-			<td>{props.reps}</td>
+			<th scrope="row">{props.data.date}</th>
+			<td>{props.data.exercise}</td>
+			<td>{props.data.weight}</td>
+			<td>{props.data.sets}</td>
+			<td>{props.data.reps}</td>
 		</tr>
 	)
 }
@@ -16,7 +15,7 @@ const GenerateData = (props) =>{
 const GenerateRow = (props) => {
 	let data = [];
 	for(let i = 0; i < props.data.length; i++){
-		console.log(props.data[i].date)
+		// console.log(props.data[i].date)
 		data.push(
 				<GenerateData key={i} data={props.data[i]}/>
 			)

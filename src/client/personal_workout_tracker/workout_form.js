@@ -27,6 +27,7 @@ export default class WorkoutForm extends Component {
 			headers: {"Content-Type": "application/json"},
 			body: JSON.stringify(this.state)
 		})
+		this.props.update(true)
 	}
 
 	render(){
