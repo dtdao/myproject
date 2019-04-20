@@ -18,10 +18,12 @@
     "cookie-parser": "^1.4.4",
     "express": "^4.16.3",
     "helmet": "^3.15.1",
+    "loaders.css": "^0.1.2",
     "mongodb": "^3.1.13",
     "mongoose": "^5.5.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-loader": "^2.4.5",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1"
   },

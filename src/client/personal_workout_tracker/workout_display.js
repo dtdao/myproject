@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 
+const formatDate = (date) =>{
+	let newDate = new Date(date)
+	const monthName = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+	let d = newDate.getDate()
+	let m = monthName[newDate.getMonth()]
+	let y = newDate.getFullYear()
+	return d + " " + m + " " + y;
+}
+
 const GenerateData = (props) =>{ 
 	return(
 		<tr>
-			<th scrope="row">{props.data.date}</th>
+			<th scrope="row">{formatDate(props.data.date)}</th>
 			<td>{props.data.exercise}</td>
 			<td>{props.data.weight}</td>
 			<td>{props.data.sets}</td>
@@ -26,8 +35,6 @@ const GenerateRow = (props) => {
 export default class WorkoutDisplay extends Component {
 	constructor(props){
 		super(props)
-		// this.state = {data: null}
-		// this.loadData = this.loadData.bind(this)
 	}
 
 	render(){
