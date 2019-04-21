@@ -7,6 +7,7 @@ import Contact from './Contact.js'
 import Home from './Home.js'
 import Calculator from './Calculator/calculator'
 import WorkoutTracker from './personal_workout_tracker/workout_app'
+import MTG from './mtg_card_collection/mtg_app'
 
 // This will be where I wil load all the project that i will code up to insert to the app
 
@@ -26,13 +27,15 @@ export default class App extends Component {
         <div>
             <NavigationBar/>
             <Switch>
-              // Using excat key word makes the components switch accurately
+              // Using exact key word makes the components switch accurately
+              // Why does theroute need exact ??
+
                <Route exact path="/" component={Home} />
-               <Route exact path="/about" component={About} />
-               <Route exact path="/calculator" component={Calculator} />
-               <Route exact path="/workout" component={WorkoutTracker} />
-               <Route exact path="/project/:apps" component={Projects} />
-               <Route exact component={NoMatch} />
+               <Route path="/about" component={About} />
+               <Route path="/calculator" component={Calculator} />
+               <Route path="/workout" component={WorkoutTracker} />
+               <Route path="/mtg" component={MTG} />
+               <Route component={NoMatch} />
             </Switch>
             <Contact />
         </div>

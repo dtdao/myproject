@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './app.css';
-import {NavLink} from 'react-router-dom'
+import {NavLink, Link} from 'react-router-dom'
 
 export default class NavigationBar extends Component {
 	constructor(props){
@@ -17,16 +17,16 @@ export default class NavigationBar extends Component {
 					<ul className="navbar-nav ml-auto">
 						<li className="nav-item"><NavLink to="/"><span className="link-text">HOME</span></NavLink></li>
 						<li className="nav-item dropdown">
-							<NavLink to="#" role="button" id="navbardropdown" data-toggle="dropdown">
+							<Link to="#" role="button" id="navbardropdown" data-toggle="dropdown">
 							<span className="link-text">PROJECTS</span>
-							</NavLink>
+							</Link>
 							<div className="dropdown-menu">
-								<NavLink to="/calculator" className="dropdown-item"><span className="link-text">CALCULATOR</span></NavLink>
-								<NavLink to="/workout" className="dropdown-item"><span className="link-text">WORKOUT TRACKER</span></NavLink>
-								<NavLink to="#" className="dropdown-item"><span className="link-text">PLACEHOLDER</span></NavLink>
-								<NavLink to="#" className="dropdown-item"><span className="link-text">PLACEHOLDER</span></NavLink>
-								<NavLink to="#" className="dropdown-item"><span className="link-text">PLACEHOLDER</span></NavLink>
-								<NavLink to="#" className="dropdown-item"><span className="link-text">PLACEHOLDER</span></NavLink>
+								<Link to="/calculator" className="dropdown-item"><span className="link-text">CALCULATOR</span></Link>
+								<Link to="/workout" className="dropdown-item"><span className="link-text">WORKOUT TRACKER</span></Link>
+								<Link to="/mtg" className="dropdown-item"><span className="link-text">MTG Collection</span></Link>
+								<Link to="#" className="dropdown-item"><span className="link-text">PLACEHOLDER</span></Link>
+								<Link to="#" className="dropdown-item"><span className="link-text">PLACEHOLDER</span></Link>
+								<Link to="#" className="dropdown-item"><span className="link-text">PLACEHOLDER</span></Link>
 							</div>
 						</li>
 						<li className="nav-item"><NavLink to="/about"><span className="link-text">ABOUT</span></NavLink></li>

@@ -2,9 +2,14 @@ import React, {Component} from 'react';
 import WorkoutForm from './workout_form.js';
 import WorkoutDisplay from './workout_display.js';
 import "./workout_app.css"
-import Loader from "react-loaders"
+import {css} from '@emotion/core'
+import {ClipLoader} from 'react-spinners'
 
-
+const override = css`
+	display: block;
+	margin: 0 auto;
+	border-color: black;
+`
 
 export default class WorkoutTracker extends Component {
 	constructor(props){
@@ -52,7 +57,8 @@ export default class WorkoutTracker extends Component {
 					<WorkoutForm update={bool =>{this.setState({reload: bool, fetch: bool})}}/>
 				</div>
 				<div className="row justify-content-sm-center">
-					{this.state.fetch ? <h1>Loading....</h1> : <WorkoutDisplay data={data}/>}
+					<WorkoutDisplay data={data}/>
+					<ClipLoader css={override} sizeUnit={'px'} size={100} color={'000000'} loading={this.state.fetch ? this.state.fetch : this.state.reload} /> 
 				</div>
 			</div>
 		)
