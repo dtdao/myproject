@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 let gracefulShutdown;
-const dbURI = 'mongodb://localhost/ExerciseTracker';
+const dbURI = 'mongodb://localhost/Project';
 if (process.env.NODE_ENV === 'production') {
     dbURI = process.env.MONGOLAB_URI;
 }
@@ -8,10 +8,12 @@ if (process.env.NODE_ENV === 'production') {
 
 //MAKE SURE TO CONNECT TO THE MONGO!!!!!!
 mongoose.connect(dbURI)
+// mongoose.createConnection(mtgURI);
 
 // CONNECTION EVENTS
 mongoose.connection.on('connected', function() {
     console.log('Mongoose connected to ' + dbURI);
+    // console.log("Mongosose connected to " + mtgURI)
 });
 mongoose.connection.on('error', function(err) {
     console.log('Mongoose connection error: ' + err);
@@ -49,3 +51,4 @@ process.on('SIGTERM', function() {
 });
 //Bring in the model
 require("./exercise.js")
+require("./mtg.js")

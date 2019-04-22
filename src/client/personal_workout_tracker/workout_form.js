@@ -27,6 +27,13 @@ export default class WorkoutForm extends Component {
 			headers: {"Content-Type": "application/json"},
 			body: JSON.stringify(this.state)
 		})
+		.then(()=>{
+			this.setState({date: '', exercise:'', weight: 1, sets: 1, reps: 1})
+		})
+		.catch( (err) => {
+			console.log(err);
+		})
+
 		this.props.update(true)
 	}
 

@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 
-let mtgSchema = new mongoose.Schema({
+
+// Temporary schema model 
+let cardSchema = new mongoose.Schema({
 	name: { 
 		type: String 
 	},
@@ -9,4 +11,4 @@ let mtgSchema = new mongoose.Schema({
 	}
 })
 
-mongoose.Model("Card", mtgSchema)
+mongoose.model("Card", cardSchema);
