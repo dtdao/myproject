@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+const mtg = require("mtgsdk");
 
 // Used the mtg sdk to consume the api
 
@@ -7,7 +8,7 @@ export default class MTG extends Component {
 		super(props)
 		this.state = {
 			collectionSearch: false,
-			searchValue: 'test'
+			searchValue: ''
 		}
 		this.selectChange = this.selectChange.bind(this);
 		this.onSearch = this.onSearch.bind(this);
@@ -16,7 +17,28 @@ export default class MTG extends Component {
 
 	onSearch(event){
 		event.preventDefault()
-		
+		console.log(this.state.searchValue)
+		// fetch("https://api.magicthegathering.io/v1/cards?name=" + this.state.searchValue, {
+		// 	method: "get"
+		// })
+		// .then(res => {
+		// 	return res.json()
+		// })
+		// .then(data =>{ 
+		// 	console.log(data.cards)
+		// })
+		// .catch(err => {
+		// 	console.log(err)
+		// })
+
+		// the api consome by query '?name='
+		// mtg.set.find(this.state.searchValue).then(result => {
+		// 	console.log(result.set.name);
+		// })
+		mtg.card.all({name: this.state.searchValue})
+			.on('data', card=>{
+				console.log(card.id);
+			} )
 	}
 
 	searchChange(event){

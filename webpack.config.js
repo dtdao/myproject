@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const nodeExternals = require('webpack-node-externals');
 
 const outputDirectory = 'dist';
 
@@ -42,5 +43,10 @@ module.exports = {
       template: './public/index.html',
       favicon: './public/favicon.ico'
     })
-  ]
+  ],
+  node: {
+    fs: "empty",
+    net: "empty",
+    tls: "empty"
+  }
 };
