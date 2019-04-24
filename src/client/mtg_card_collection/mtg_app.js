@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import CardResult from './result_display.js';
 const mtg = require("mtgsdk");
 
 // Used the mtg sdk to consume the api
@@ -8,7 +9,8 @@ export default class MTG extends Component {
 		super(props)
 		this.state = {
 			collectionSearch: false,
-			searchValue: ''
+			searchValue: '',
+			searchResult: []
 		}
 		this.selectChange = this.selectChange.bind(this);
 		this.onSearch = this.onSearch.bind(this);
@@ -17,34 +19,25 @@ export default class MTG extends Component {
 
 	onSearch(event){
 		event.preventDefault()
-		console.log(this.state.searchValue)
-		// fetch("https://api.magicthegathering.io/v1/cards?name=" + this.state.searchValue, {
-		// 	method: "get"
+		let searchresult = []
+		// mtg.card.all({name: this.state.searchValue})
+		// 	.on('data', card=>{
+		// 		searchresult.push(card)
+		// 	})
+		// this.setState({
+		// 	searchResult: searchresult
 		// })
-		// .then(res => {
-		// 	return res.json()
-		// })
-		// .then(data =>{ 
-		// 	console.log(data.cards)
-		// })
-		// .catch(err => {
-		// 	console.log(err)
-		// })
-
-		// the api consome by query '?name='
-		// mtg.set.find(this.state.searchValue).then(result => {
-		// 	console.log(result.set.name);
-		// })
-		mtg.card.all({name: this.state.searchValue})
-			.on('data', card=>{
-				console.log(card.id);
-			} )
+		mtg.card.find("?name="+ this.state.searchValue)
+		.then(result => {
+			console.log(result.cards)
+			this.setState({
+				searchResult: result.cards
+			})
+		})
 	}
 
 	searchChange(event){
-		this.setState({
-			searchValue: event.target.value
-		})
+		this.state.searchValue = event.target.value
 	}
 
 	selectChange(event){
@@ -59,7 +52,9 @@ export default class MTG extends Component {
 			})
 		}
 	}
+
 	render(){
+		const {searchResult} = this.state
 		return (
 			<div className="container">
 				<div className="row justify-content-md-center" >
@@ -82,6 +77,7 @@ export default class MTG extends Component {
 						</div>
 					</form>
 				</div>
+				<CardResult result={searchResult} />
 			</div>
 		)
 	}
