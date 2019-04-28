@@ -19,21 +19,23 @@ export default class MTG extends Component {
 
 	onSearch(event){
 		event.preventDefault()
-		let searchresult = []
-		// mtg.card.all({name: this.state.searchValue})
-		// 	.on('data', card=>{
-		// 		searchresult.push(card)
-		// 	})
+		mtg.card.where({name: this.state.searchValue, orderBy: 'name'})
+			.then(result => {
+				this.setState({
+					searchResult: result
+				})
+			})
 		// this.setState({
 		// 	searchResult: searchresult
 		// })
-		mtg.card.find("?name="+ this.state.searchValue)
-		.then(result => {
-			console.log(result.cards)
-			this.setState({
-				searchResult: result.cards
-			})
-		})
+		// console.log("Searching....")
+		// mtg.card.find("?name="+ this.state.searchValue)
+		// .then(result => {
+		// 	console.log(result.cards)
+		// 	this.setState({
+		// 		searchResult: result.cards
+		// 	})
+		// })
 	}
 
 	searchChange(event){
