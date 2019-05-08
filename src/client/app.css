@@ -17,6 +17,9 @@ a, a:link, a:active, a:visited, a:hover {
 	color: gray;
 }
 
+.contact-area{
+	margin-top: 20px;
+}
 
 #mylogo {
 	float: left;

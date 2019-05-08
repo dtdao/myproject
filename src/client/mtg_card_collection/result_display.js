@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import Card from './mtg_card.js';
+import "./mtg_app.css"
 
 const GenerateCardList = (prop) => {
 	let cardResult = []
@@ -14,6 +15,11 @@ const GenerateCardList = (prop) => {
 	return cardResult
 }
 
+//
+const removeDuplicates = (list) =>{
+
+}
+
 export default class CardResult extends Component{
 	constructor(props){
 		super(props)
@@ -22,9 +28,9 @@ export default class CardResult extends Component{
 	render(){
 		return(
 			<div className="row justify-content-md-center">
-				<ul className="row justify-content-md-center">
+				<div className="row list-group" >
 					<GenerateCardList card={this.props.result} />					
-				</ul>
+				</div>
 			</div>
 
 		)
