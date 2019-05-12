@@ -19,12 +19,17 @@ export default class MTG extends Component {
 
 	onSearch(event){
 		event.preventDefault()
+		if(this.state.collectionSearch == false){
 		mtg.card.where({name: this.state.searchValue, orderBy: 'name'})
 			.then(result => {
 				this.setState({
 					searchResult: result
 				})
 			})
+		}
+		else {
+			console.log("Searching for collection item")
+		}
 		// this.setState({
 		// 	searchResult: searchresult
 		// })
@@ -36,6 +41,7 @@ export default class MTG extends Component {
 		// 		searchResult: result.cards
 		// 	})
 		// })
+
 	}
 
 	searchChange(event){
@@ -45,12 +51,16 @@ export default class MTG extends Component {
 	selectChange(event){
 		if(event.target.value == "mycollection"){
 			this.setState({
-				collectionSearch: true
+				collectionSearch: true,
+				searchValue: "",
+				searchResult: []
 			})
 		}
 		else {
 			this.setState({
-				collectionSearch: false
+				collectionSearch: false,
+				searchValue: "",
+				searchResult: []
 			})
 		}
 	}

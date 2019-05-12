@@ -8,7 +8,9 @@ const GenerateCardList = (prop) => {
 	for (let i = 0; i < prop.card.length; i++){
 		if(prop.card[i].imageUrl){
 			cardResult.push(
-					<Card data={prop.card[i]} key={i}/>
+				<div className="col-6 col-lg-3 col-md-4 col-sm-6" key={i}>
+					<Card data={prop.card[i]} info={prop.collection}/>
+				</div>
 				)
 		}
 	}
@@ -16,9 +18,6 @@ const GenerateCardList = (prop) => {
 }
 
 //
-const removeDuplicates = (list) =>{
-
-}
 
 export default class CardResult extends Component{
 	constructor(props){
@@ -28,11 +27,8 @@ export default class CardResult extends Component{
 	render(){
 		return(
 			<div className="row justify-content-md-center">
-				<div className="row list-group" >
-					<GenerateCardList card={this.props.result} />					
-				</div>
+				<GenerateCardList card={this.props.result}  collection={this.props.mycollection}/>
 			</div>
-
 		)
 	}
 }

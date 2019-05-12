@@ -8,6 +8,9 @@ let cardSchema = new mongoose.Schema({
 	},
 	count: {
 		type: Number
+	},
+	imgurl: {
+		type: String
 	}
 })
 

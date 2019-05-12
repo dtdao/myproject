@@ -17,35 +17,61 @@ export default class Card extends Component {
 
 		this.onLoaded = this.onLoaded.bind(this)
 		// this.imgFailed = this.imgFailed.bind(this)
-		this.clickHandler = this.clickHandler.bind(this)
+		this.addCard = this.addCard.bind(this)
+		this.removeCard = this.removeCard.bind(this)
 	}
 
 	onLoaded(){
+		console.log(this.props)
 		this.setState({
 			loaded: true
 		})
 	}
 	// 
-	// 
-	clickHandler(e){
-		// Open side bar
+	//
+
+	addCard(event){
+		event.preventDefault()
+		console.log("Add card to collection")
+
 	}
+
+	removeCard(event){
+		event.preventDefault()
+		console.log("Remove card from collection")
+	}
+
+				// 	<div className="d-flex p-2">
+				// 	<div className="align-self-start">
+				// 		<ClipLoader css={override} sizeUnit={'px'} size={100} color={'000000'} loading={!this.state.loaded} />
+				// 		<img className="mtg-card img-fluid" src={this.props.data.imageUrl} alt={this.props.data.name} key={this.props.data.id} onLoad={this.onLoaded} onClick={this.clickHandler} />
+				// 	</div>
+				// 	<div className="align-self-stretch ml-3">
+				// 		<div className="d-flex w-100 justify-content-between">
+				// 			<h3 className="mb-1">{this.props.data.name}</h3>
+				// 			<small>{this.props.data.cmc}</small>
+				// 		</div>
+				// 		<p>{this.props.data.text}</p>
+				// 	</div>
+				// </div>
 	render(){
-		// console.log(this.props)
 		return(
-			<div className="list-group-item list-group-action">
-				<div className="d-flex p-2">
-					<div className="align-self-start">
-						<ClipLoader css={override} sizeUnit={'px'} size={100} color={'000000'} loading={!this.state.loaded} />
-						<img className="mtg-card img-fluid" src={this.props.data.imageUrl} alt={this.props.data.name} key={this.props.data.id} onLoad={this.onLoaded} onClick={this.clickHandler} />
+			<div className="container card-container p-2">
+				<ClipLoader className="justify-content-md-center" css={override} sizeUnit={'px'} size={100} color={'000000'} loading={!this.state.loaded} />
+				<img className="mtg-card img-fluid" src={this.props.data.imageUrl} alt={this.props.data.name} key={this.props.data.id} onLoad={this.onLoaded}/>
+				<div className="card-data-middle">
+					{this.props.info ? 
+
+					<div className="info">
+						<h3>How many card in collection : </h3>
+						<button type="submit" onClick={this.removeCard}>Remove</button>
+						<button type="submit" onClick={this.addCard}>Add Card</button>
+ 					</div> :
+
+					<div className="info">
+						<button type="submit" onClick={this.addCard}>Add Card</button>
 					</div>
-					<div className="align-self-stretch ml-3">
-						<div className="d-flex w-100 justify-content-between">
-							<h3 className="mb-1">{this.props.data.name}</h3>
-							<small>{this.props.data.cmc}</small>
-						</div>
-						<p>{this.props.data.text}</p>
-					</div>
+					}
 				</div>
 			</div>
 		)
