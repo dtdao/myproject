@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {css} from '@emotion/core'
 import {ClipLoader} from 'react-spinners'
+const mtg = require("mtgsdk");
 
 const override = css`
 	display: block;
@@ -22,23 +23,47 @@ export default class Card extends Component {
 	}
 
 	onLoaded(){
-		console.log(this.props)
 		this.setState({
 			loaded: true
 		})
 	}
 	// 
 	//
-
 	addCard(event){
 		event.preventDefault()
-		console.log("Add card to collection")
+		mtg.card.where({
+			id: event.target.value
+		}).then(result => {
+			let card ={
+				name: result[0].name,
+				count: 1,
+				imgurl: result[0].imageUrl,
+				id: result[0].id
+			}
+			fetch("/api/mtg/add", {
+				method: "post",
+				headers: {"Content-Type": "application/json"},
+				body: JSON.stringify(card)
+			}).then(() => {
+				console.log("Added: " + result[0].name + " to collection")
+			}).catch(err=>{
+				console.log(err)
+			})
+		})
 
 	}
 
 	removeCard(event){
+		//passing What card that I want to delete through the parametter
+		//Probably send the info using the body
 		event.preventDefault()
-		console.log("Remove card from collection")
+		fetch("/api/mtg/"+ event.target.value, {
+			method: "delete"
+		}).then( ()=>{
+			console.log(console.log("Deleted a card from collection" ))
+		}).catch( err => {
+			console.log(err)
+		})
 	}
 
 				// 	<div className="d-flex p-2">
@@ -54,6 +79,7 @@ export default class Card extends Component {
 				// 		<p>{this.props.data.text}</p>
 				// 	</div>
 				// </div>
+
 	render(){
 		return(
 			<div className="container card-container p-2">
@@ -69,7 +95,7 @@ export default class Card extends Component {
  					</div> :
 
 					<div className="info">
-						<button type="submit" onClick={this.addCard}>Add Card</button>
+						<button type="submit" onClick={this.addCard} value={this.props.data.id}>Add Card</button>
 					</div>
 					}
 				</div>

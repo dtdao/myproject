@@ -11,6 +11,9 @@ let cardSchema = new mongoose.Schema({
 	},
 	imgurl: {
 		type: String
+	},
+	id: {
+		type: String
 	}
 })
 

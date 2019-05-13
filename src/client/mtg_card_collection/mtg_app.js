@@ -66,7 +66,7 @@ export default class MTG extends Component {
 	}
 
 	render(){
-		const {searchResult} = this.state
+		const {searchResult, collectionSearch} = this.state
 		return (
 			<div className="container">
 				<div className="row justify-content-md-center" >
@@ -89,7 +89,7 @@ export default class MTG extends Component {
 						</div>
 					</form>
 				</div>
-				<CardResult result={searchResult} />
+				<CardResult result={searchResult} mycollection={collectionSearch}/>
 			</div>
 		)
 	}

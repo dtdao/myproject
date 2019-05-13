@@ -26,7 +26,6 @@ export default class WorkoutTracker extends Component {
 		console.log("Loading Data");
 		fetch("/api/exercise/")
 			.then(res => {
-
 				return res.json()
 			})
 			.then(data => {
