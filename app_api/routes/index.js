@@ -14,7 +14,7 @@ router.get("/exercise/", exerciseCtrl.exerciseQuery)
 router.post("/mtg/add", mtgCtrl.addNewCard)
 router.put("/mtg/:cardid", mtgCtrl.modifyCard)
 router.delete("/mtg/:cardid", mtgCtrl.deleteCard)
-router.get("/mtg", mtgCtrl.getCard)
+router.get("/mtg/:cardname", mtgCtrl.getCard)
 
 module.exports = router
 

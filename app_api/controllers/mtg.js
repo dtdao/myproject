@@ -47,5 +47,14 @@ module.exports.deleteCard = (req, res) => {
 }
 
 module.exports.getCard = (req, res) =>{
-	sendJSONresponse(res, 200, {message: "get card router success!"})
-}
+	//Had to gointo mongodb and createindex for name db.cards.createIndex({name: "text"})
+	Card.find({$text: {$search: req.params.cardname}}, (err, cards) =>{
+		if(err){
+			console.log(err)
+			sendJSONresponse(res, 400, err)
+		}
+		else {
+			sendJSONresponse(res, 200, cards)
+		}
+	})
+} 

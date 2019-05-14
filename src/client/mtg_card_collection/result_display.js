@@ -6,6 +6,8 @@ const GenerateCardList = (prop) => {
 	let cardResult = []
 	console.log(prop.card.length)
 	for (let i = 0; i < prop.card.length; i++){
+		//IMAGE NOT SHOWING UO BECAUSE VARIABLE NAME IS DIFFERENT imageurl and not imageUrl
+		//FIX TOMORROW
 		if(prop.card[i].imageUrl){
 			cardResult.push(
 				<div className="col-6 col-lg-3 col-md-4 col-sm-6" key={i}>
@@ -25,6 +27,7 @@ export default class CardResult extends Component{
 	}
 
 	render(){
+		console.log(this.props.result)
 		return(
 			<div className="row justify-content-md-center">
 				<GenerateCardList card={this.props.result}  collection={this.props.mycollection}/>

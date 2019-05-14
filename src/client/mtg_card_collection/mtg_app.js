@@ -22,12 +22,28 @@ export default class MTG extends Component {
 		if(this.state.collectionSearch == false){
 		mtg.card.where({name: this.state.searchValue, orderBy: 'name'})
 			.then(result => {
+				console.log(result)
 				this.setState({
 					searchResult: result
 				})
 			})
 		}
 		else {
+			fetch("/api/mtg/"+this.state.searchValue, {
+				method: "get",
+			}).then((result)=>{
+				console.log("Searching collection for cards with : " + this.state.searchValue)
+				result.json().then(body =>{
+					console.log(body);
+					this.setState({
+						searchResult: body
+					})
+				})
+			}).catch(err => {
+				if(err){
+					console.log(err)
+				}
+			})
 			console.log("Searching for collection item")
 		}
 		// this.setState({
