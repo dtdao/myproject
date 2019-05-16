@@ -10,7 +10,7 @@ module.exports.addNewCard = (req, res) =>{
 	let newCard = {
 		name: req.body.name,
 		$inc: {count: 1},
-		imgurl: req.body.imgurl,
+		imageUrl: req.body.imgurl,
 		id: req.body.id
 	}
 
@@ -27,9 +27,19 @@ module.exports.addNewCard = (req, res) =>{
 	})
 }
 
-module.exports.modifyCard = (req, res) => {
+module.exports.updateCard = (req, res) => {
 
-	sendJSONresponse(res, 200, {message: "modify card router success"})
+	console.log(req.params.cardid)
+	Card.findOneAndUpdate({
+		id: req.params.cardid
+	}, {$inc: { count: 1} }, {new: true},  (err, card) =>{
+		if(err){
+			sendJSONresponse(res, 400, err)
+		}
+		else {
+			sendJSONresponse(res, 200, card)
+		}
+	})
 }
 
 module.exports.deleteCard = (req, res) => {
@@ -48,13 +58,26 @@ module.exports.deleteCard = (req, res) => {
 
 module.exports.getCard = (req, res) =>{
 	//Had to gointo mongodb and createindex for name db.cards.createIndex({name: "text"})
-	Card.find({$text: {$search: req.params.cardname}}, (err, cards) =>{
-		if(err){
-			console.log(err)
-			sendJSONresponse(res, 400, err)
-		}
-		else {
-			sendJSONresponse(res, 200, cards)
-		}
-	})
+	if(req.params.cardname == ""){
+		Card.find({}, (err, cards) => {
+			if(err){
+				console.log(err)
+				sendJSONresponse(res, 400, err)
+			}
+			else {
+				sendJSONresponse(res, 200, cards)
+			}
+		})
+	}
+	else {
+		Card.find({$text: {$search: req.params.cardname}}, (err, cards) =>{
+			if(err){
+				console.log(err)
+				sendJSONresponse(res, 400, err)
+			}
+			else {
+				sendJSONresponse(res, 200, cards)
+			}
+		})
+	}
 } 

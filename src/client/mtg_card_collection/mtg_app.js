@@ -22,22 +22,20 @@ export default class MTG extends Component {
 		if(this.state.collectionSearch == false){
 		mtg.card.where({name: this.state.searchValue, orderBy: 'name'})
 			.then(result => {
-				console.log(result)
 				this.setState({
 					searchResult: result
 				})
 			})
 		}
 		else {
+			/*Need to fix this, problems occur when blank search on internal database*/
 			fetch("/api/mtg/"+this.state.searchValue, {
 				method: "get",
-			}).then((result)=>{
-				console.log("Searching collection for cards with : " + this.state.searchValue)
-				result.json().then(body =>{
-					console.log(body);
-					this.setState({
-						searchResult: body
-					})
+			}).then((res)=>{
+				return res.json()
+			}).then(data =>{
+				this.setState({
+					searchResult: data
 				})
 			}).catch(err => {
 				if(err){
@@ -46,18 +44,6 @@ export default class MTG extends Component {
 			})
 			console.log("Searching for collection item")
 		}
-		// this.setState({
-		// 	searchResult: searchresult
-		// })
-		// console.log("Searching....")
-		// mtg.card.find("?name="+ this.state.searchValue)
-		// .then(result => {
-		// 	console.log(result.cards)
-		// 	this.setState({
-		// 		searchResult: result.cards
-		// 	})
-		// })
-
 	}
 
 	searchChange(event){
@@ -68,14 +54,14 @@ export default class MTG extends Component {
 		if(event.target.value == "mycollection"){
 			this.setState({
 				collectionSearch: true,
-				searchValue: "",
+				searchValue: '',
 				searchResult: []
 			})
 		}
 		else {
 			this.setState({
 				collectionSearch: false,
-				searchValue: "",
+				searchValue: '',
 				searchResult: []
 			})
 		}
@@ -86,7 +72,9 @@ export default class MTG extends Component {
 		return (
 			<div className="container">
 				<div className="row justify-content-md-center" >
-					<h1>My Card collection</h1>
+					{this.state.collectionSearch ? 
+						<h1>My Card collection</h1> : <h1>MTG Library</h1>
+					}
 				</div>
 
 				<div className="row justify-content-md-center">

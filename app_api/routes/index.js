@@ -12,7 +12,7 @@ router.get("/exercise/", exerciseCtrl.exerciseQuery)
 //router for mtg api
 
 router.post("/mtg/add", mtgCtrl.addNewCard)
-router.put("/mtg/:cardid", mtgCtrl.modifyCard)
+router.put("/mtg/:cardid", mtgCtrl.updateCard)
 router.delete("/mtg/:cardid", mtgCtrl.deleteCard)
 router.get("/mtg/:cardname", mtgCtrl.getCard)
 

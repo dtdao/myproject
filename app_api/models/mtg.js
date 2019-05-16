@@ -9,7 +9,7 @@ let cardSchema = new mongoose.Schema({
 	count: {
 		type: Number
 	},
-	imgurl: {
+	imageUrl: {
 		type: String
 	},
 	id: {
