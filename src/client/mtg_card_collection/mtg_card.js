@@ -14,7 +14,7 @@ export default class Card extends Component {
 		super(props)
 		this.state = {
 			loaded: false,
-			collectionSearch: ""
+			count: this.props.data.count
 		}
 
 		this.onLoaded = this.onLoaded.bind(this)
@@ -24,25 +24,37 @@ export default class Card extends Component {
 
 	onLoaded(){
 		this.setState({
-			loaded: true,
-			collectionSearch: this.props.info
+			loaded: true
+		})
+	}
+
+	componentWillReceiveProps(nextprops){
+		this.setState({
+			count: nextprops.data.count
 		})
 	}
 	// 
 	//
 	addCard(event){
 		event.preventDefault()
-		if(this.state.collectionSearch){
-			fetch("/api/mtg/"+ event.target.value, {
+		if(this.props.info){
+			fetch("/api/mtg/add/"+ event.target.value, {
 				method: "put",
 				headers: {"Content-type": "application/json"}
 			})
 			.then(res => {
-				console.log("Added anther card to collection")
+				console.log("Added another card to collection")
+				return res.json()
+			})
+			.then(card => {
+				this.setState({
+					count: card.count
+				})
 			})
 			.catch(err => {
 				console.log(err)
 			})
+
 		}
 		else{ 
 			mtg.card.where({
@@ -71,26 +83,35 @@ export default class Card extends Component {
 		//passing What card that I want to delete through the parametter
 		//Probably send the info using the body
 		event.preventDefault()
-		fetch("/api/mtg/"+ event.target.value, {
-			method: "delete"
-		}).then( ()=>{
+		fetch("/api/mtg/remove/"+ event.target.value, {
+			method: "put",
+			header: {"Content-type": "application/json"}
+		}).then((res)=>{
 			console.log(console.log("Deleted a card from collection" ))
-		}).catch( err => {
+			return res.json()
+		})
+		.then(card => {
+			this.setState({
+				count: card.count
+			})
+		})
+		.catch( err => {
 			console.log(err)
 		})
 	}
 
 	render(){
+		let {count} = this.state
 		return(
-			<div className="container card-container p-2">
+			<div className="container card-container p-2" key={this.props.data.id}>
 				<ClipLoader className="justify-content-md-center" css={override} sizeUnit={'px'} size={100} color={'000000'} loading={!this.state.loaded} />
-				<img className="mtg-card img-fluid" src={this.props.data.imageUrl} alt={this.props.data.name} key={this.props.data.id} onLoad={this.onLoaded}/>
+				<img className="mtg-card img-fluid" src={this.props.data.imageUrl} alt={this.props.data.name} onLoad={this.onLoaded}/>
 				<div className="card-data-middle">
 					{this.props.info ? 
 
 					<div className="info">
-						<h6>Total in collection : {this.props.data.count} </h6>
-						<button className="m-2" type="submit" onClick={this.removeCard}>Remove</button>
+						<h6>Total in collection : {count} </h6>
+						<button className="m-2" type="submit" onClick={this.removeCard} value={this.props.data.id}>Remove</button>
 						<button className="m-2" type="submit" onClick={this.addCard} value={this.props.data.id}>Add Card</button>
  					</div> :
 

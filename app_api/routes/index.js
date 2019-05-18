@@ -12,8 +12,8 @@ router.get("/exercise/", exerciseCtrl.exerciseQuery)
 //router for mtg api
 
 router.post("/mtg/add", mtgCtrl.addNewCard)
-router.put("/mtg/:cardid", mtgCtrl.updateCard)
-router.delete("/mtg/:cardid", mtgCtrl.deleteCard)
+router.put("/mtg/add/:cardid", mtgCtrl.updateCard)
+router.put("/mtg/remove/:cardid", mtgCtrl.removeCard)
 router.get("/mtg/:cardname", mtgCtrl.getCard)
 
 module.exports = router

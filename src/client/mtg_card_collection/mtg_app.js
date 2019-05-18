@@ -47,7 +47,9 @@ export default class MTG extends Component {
 	}
 
 	searchChange(event){
-		this.state.searchValue = event.target.value
+		this.setState({
+			searchValue: event.target.value
+		})
 	}
 
 	selectChange(event){

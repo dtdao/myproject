@@ -28,8 +28,6 @@ module.exports.addNewCard = (req, res) =>{
 }
 
 module.exports.updateCard = (req, res) => {
-
-	console.log(req.params.cardid)
 	Card.findOneAndUpdate({
 		id: req.params.cardid
 	}, {$inc: { count: 1} }, {new: true},  (err, card) =>{
@@ -42,10 +40,11 @@ module.exports.updateCard = (req, res) => {
 	})
 }
 
-module.exports.deleteCard = (req, res) => {
-	Card.findOneAndDelete({
+module.exports.removeCard = (req, res) => {
+	console.log(req.params.cardid)
+	Card.findOneAndUpdate({
 		id: req.params.cardid
-	}, (err, doc) =>{
+	}, {$inc: {count: -1}}, {new: true}, (err, doc) =>{
 		if(err){
 			console.log(err)
 			sendJSONresponse(res, 400, err)
