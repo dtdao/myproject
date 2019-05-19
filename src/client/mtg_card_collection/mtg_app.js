@@ -47,9 +47,7 @@ export default class MTG extends Component {
 	}
 
 	searchChange(event){
-		this.setState({
-			searchValue: event.target.value
-		})
+		this.state.searchValue = event.target.value
 	}
 
 	selectChange(event){
@@ -70,7 +68,7 @@ export default class MTG extends Component {
 	}
 
 	render(){
-		const {searchResult, collectionSearch} = this.state
+		const {searchResult, collectionSearch, searchValue} = this.state
 		return (
 			<div className="container">
 				<div className="row justify-content-md-center" >
@@ -95,7 +93,7 @@ export default class MTG extends Component {
 						</div>
 					</form>
 				</div>
-				<CardResult result={searchResult} mycollection={collectionSearch}/>
+				<CardResult result={searchResult} mycollection={collectionSearch} term={searchValue}/>
 			</div>
 		)
 	}

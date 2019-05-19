@@ -6,6 +6,14 @@ let sendJSONresponse = function(res, status, content) {
   res.json(content);
 };
 
+const removeCard = (card) =>{
+	Card.findOneAndRemove({id: card}, (err, card) => {
+		if(err){
+			console.log(err)
+		}
+	})
+}
+
 module.exports.addNewCard = (req, res) =>{
 	let newCard = {
 		name: req.body.name,
@@ -35,6 +43,7 @@ module.exports.updateCard = (req, res) => {
 			sendJSONresponse(res, 400, err)
 		}
 		else {
+
 			sendJSONresponse(res, 200, card)
 		}
 	})
@@ -44,13 +53,16 @@ module.exports.removeCard = (req, res) => {
 	console.log(req.params.cardid)
 	Card.findOneAndUpdate({
 		id: req.params.cardid
-	}, {$inc: {count: -1}}, {new: true}, (err, doc) =>{
+	}, {$inc: {count: -1}}, {new: true}, (err, card) =>{
 		if(err){
 			console.log(err)
 			sendJSONresponse(res, 400, err)
 		}
 		else {
-			sendJSONresponse(res, 200, doc)
+			if(card.count == 0){
+				removeCard(card.id)
+			}
+			sendJSONresponse(res, 200, card)
 		}
 	})
 }

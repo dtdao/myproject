@@ -111,7 +111,7 @@ export default class Card extends Component {
 
 					<div className="info">
 						<h6>Total in collection : {count} </h6>
-						<button className="m-2" type="submit" onClick={this.removeCard} value={this.props.data.id}>Remove</button>
+						<button className="m-2" type="submit" onClick={this.removeCard} value={this.props.data.id} disabled={count == 0}>Remove</button>
 						<button className="m-2" type="submit" onClick={this.addCard} value={this.props.data.id}>Add Card</button>
  					</div> :
 

@@ -21,12 +21,36 @@ const GenerateCardList = (prop) => {
 export default class CardResult extends Component{
 	constructor(props){
 		super(props)
+		this.state = {
+			searchterm: this.props.searchterm,
+			list: []
+		}
+		// this.collectionChecker = this.collectionChecker.bind(this)
+	}
+
+	// collectionChecker(id){
+	// 	let newList=[]
+	// 	for (let i = 0; i < this.state.list; i++){
+	// 		if(this.state.list[i].id != id){
+	// 			newList.push(this.state.list[i])
+	// 		}
+	// 	}
+	// 	this.setState({
+	// 		list: newList
+	// 	})
+	// }
+
+	componentWillReceiveProps(nextprops){
+		this.setState({
+			list: nextprops.result
+		})
 	}
 
 	render(){
+		let {list} = this.state
 		return(
 			<div className="row justify-content-md-center">
-				<GenerateCardList card={this.props.result}  collection={this.props.mycollection}/>
+				<GenerateCardList card={list}  collection={this.props.mycollection} />
 			</div>
 		)
 	}
