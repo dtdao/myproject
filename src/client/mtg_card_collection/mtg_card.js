@@ -94,10 +94,14 @@ export default class Card extends Component {
 			this.setState({
 				count: card.count
 			})
+			if(card.count == 0){
+				this.props.test(card.id)
+			}
 		})
 		.catch( err => {
 			console.log(err)
 		})
+		
 	}
 
 	render(){

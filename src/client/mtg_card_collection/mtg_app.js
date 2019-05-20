@@ -15,6 +15,7 @@ export default class MTG extends Component {
 		this.selectChange = this.selectChange.bind(this);
 		this.onSearch = this.onSearch.bind(this);
 		this.searchChange = this.searchChange.bind(this);
+		this.reload = this.reload.bind(this)
 	}
 
 	onSearch(event){
@@ -44,6 +45,18 @@ export default class MTG extends Component {
 			})
 			console.log("Searching for collection item")
 		}
+	}
+
+	reload(card){
+		//This will find the card and remove from list and then reload.
+		let newSearch = this.state.searchResult.filter( item => {
+			if(item.id != card){
+				return item
+			}
+		})
+		this.setState({
+			searchResult: newSearch
+		})
 	}
 
 	searchChange(event){
@@ -93,7 +106,7 @@ export default class MTG extends Component {
 						</div>
 					</form>
 				</div>
-				<CardResult result={searchResult} mycollection={collectionSearch} term={searchValue}/>
+				<CardResult reload={this.reload}  result={searchResult} mycollection={collectionSearch} term={searchValue} />
 			</div>
 		)
 	}
