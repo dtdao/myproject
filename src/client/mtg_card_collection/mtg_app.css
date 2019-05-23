@@ -1,3 +1,16 @@
+@media (max-width: @screen-xs){
+  body{font-size: 10px}
+}
+
+@media (max-width: @screen-sm){
+  body{font-size: 10px}
+}
+
+
+
+#main-title{
+  font-size: 2em;
+}
 
 .card-data-middle {
   transition: .5s ease;

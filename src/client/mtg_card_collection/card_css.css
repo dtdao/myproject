@@ -1,3 +1,14 @@
+@media (max-width: @screen-xs){
+  body{font-size: 10px}
+}
+
+@media (max-width: @screen-sm){
+  body{font-size: 10px}
+}
+
+h1{
+  font-size: 1.4em;
+}
 
 .card-data-middle {
   transition: .5s ease;
@@ -27,3 +38,4 @@
   transition: .5s ease;
   backface-visibility: hidden;
 }
+

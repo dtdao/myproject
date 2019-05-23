@@ -110,13 +110,14 @@ export default class Card extends Component {
 			<div className="container card-container p-2" key={this.props.data.id}>
 				<ClipLoader className="justify-content-md-center" css={override} sizeUnit={'px'} size={100} color={'000000'} loading={!this.state.loaded} />
 				<img className="mtg-card img-fluid" src={this.props.data.imageUrl} alt={this.props.data.name} onLoad={this.onLoaded}/>
-				<div className="card-data-middle">
+				<div className="card-data-middle container-fluid">
 					{this.props.info ? 
+
 
 					<div className="info">
 						<h6>Total in collection : {count} </h6>
-						<button className="m-2" type="submit" onClick={this.removeCard} value={this.props.data.id} disabled={count == 0}>Remove</button>
-						<button className="m-2" type="submit" onClick={this.addCard} value={this.props.data.id}>Add Card</button>
+						<button className="btn btn-sm m-2" type="submit" onClick={this.removeCard} value={this.props.data.id} disabled={count == 0}>Remove</button>
+						<button className="btn btn-sm m-2" type="submit" onClick={this.addCard} value={this.props.data.id}>Add Card</button>
  					</div> :
 
 					<div className="info">

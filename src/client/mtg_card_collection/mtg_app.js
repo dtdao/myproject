@@ -29,7 +29,6 @@ export default class MTG extends Component {
 			})
 		}
 		else {
-			/*Need to fix this, problems occur when blank search on internal database*/
 			fetch("/api/mtg/"+this.state.searchValue, {
 				method: "get",
 			}).then((res)=>{
@@ -48,7 +47,6 @@ export default class MTG extends Component {
 	}
 
 	reload(card){
-		//This will find the card and remove from list and then reload.
 		let newSearch = this.state.searchResult.filter( item => {
 			if(item.id != card){
 				return item
@@ -60,7 +58,9 @@ export default class MTG extends Component {
 	}
 
 	searchChange(event){
-		this.state.searchValue = event.target.value
+		this.setState({
+			searchValue: event.target.value
+		})
 	}
 
 	selectChange(event){
@@ -84,22 +84,22 @@ export default class MTG extends Component {
 		const {searchResult, collectionSearch, searchValue} = this.state
 		return (
 			<div className="container">
-				<div className="row justify-content-md-center" >
+				<div className="row justify-content-center" >
 					{this.state.collectionSearch ? 
-						<h1>My Card collection</h1> : <h1>MTG Library</h1>
+						<h1 id="main-title">My Card collection</h1> : <h1 id="main-title">MTG Library</h1>
 					}
 				</div>
 
-				<div className="row justify-content-md-center">
+				<div className="row justify-content-center">
 					<form className="col-sm-10" onSubmit={this.onSearch}>
-						<div className="input-group mb-3">
+						<div className="input-group input-group-sm mb-3">
 							<div className="input-group-prepend">	
-								<select className="custom-select" id="inputgroupselect" onChange={this.selectChange}>
-									<option defaultValue="allcards">ALL CARDS</option>
+								<select className="custom-select input-sm" id="inputgroupselect" onChange={this.selectChange}>
+									<option defaultValue="allcards" >ALL CARDS</option>
 									<option value="mycollection">MY CARDS</option>
 								</select>
 							</div>
-							<input type="text" className="form-control" placeholder="search" aria-label="Search for your card here" onChange={this.searchChange} value={this.state.value}/>
+							<input type="text" className="form-control input-lg" placeholder="search" aria-label="Search for your card here" onChange={this.searchChange} value={this.state.searchValue}/>
 							<div className="input-group-append">
 								<button className="btn btn-outline-secondary" type="button" id="search-button" onClick={this.onSearch}>Search</button>
 							</div>  

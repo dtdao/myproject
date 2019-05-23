@@ -8,6 +8,7 @@ import Home from './Home.js'
 import Calculator from './Calculator/calculator'
 import WorkoutTracker from './personal_workout_tracker/workout_app'
 import MTG from './mtg_card_collection/mtg_app'
+import News from './news_search/news_search_app'
 
 // This will be where I wil load all the project that i will code up to insert to the app
 
@@ -35,6 +36,7 @@ export default class App extends Component {
                <Route path="/calculator" component={Calculator} />
                <Route path="/workout" component={WorkoutTracker} />
                <Route path="/mtg" component={MTG} />
+               <Route path="/news" component={News} />
                <Route component={NoMatch} />
             </Switch>
             <Contact />

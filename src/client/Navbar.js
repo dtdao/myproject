@@ -24,7 +24,7 @@ export default class NavigationBar extends Component {
 								<Link to="/calculator" className="dropdown-item"><span className="link-text">CALCULATOR</span></Link>
 								<Link to="/workout" className="dropdown-item"><span className="link-text">WORKOUT TRACKER</span></Link>
 								<Link to="/mtg" className="dropdown-item"><span className="link-text">MTG COLLECTION</span></Link>
-								<Link to="#" className="dropdown-item"><span className="link-text">PLACEHOLDER</span></Link>
+								<Link to="/news" className="dropdown-item"><span className="link-text">NEWS</span></Link>
 								<Link to="#" className="dropdown-item"><span className="link-text">PLACEHOLDER</span></Link>
 								<Link to="#" className="dropdown-item"><span className="link-text">PLACEHOLDER</span></Link>
 							</div>
