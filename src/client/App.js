@@ -13,15 +13,6 @@ import News from './news_search/news_search_app'
 // This will be where I wil load all the project that i will code up to insert to the app
 
 export default class App extends Component {
-  // state = { username: null };
-
-  // componentDidMount() {
-  //   fetch('/api/getUsername')
-  //     .then(res => res.json())
-  //     .then(user => this.setState({ username: user.username }));
-  // }
-
-
   render() {
     return (
       <Router>
@@ -52,7 +43,7 @@ export default class App extends Component {
 
   function About(){
     return <h1>This is about me</h1>
-  } 
+  }
 
   function NoMatch(){
     return <h1>No match found</h1>

@@ -1,0 +1,61 @@
+
+@media screen and (min-width: 120px){
+  .searchBar{
+    margin-bottom: auto;
+    margin-top: auto;
+    height: 60px;
+    background-color: black;
+    border-radius: 30px;
+    padding: 10px;
+  }
+
+  .searchinput{
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 0;
+    caret-color:transparent;
+    line-height: 40px;
+    transition: width 0.4s linear;
+  }
+
+  .searchBar:hover > .searchinput{
+    padding: 0 10px;
+    width: 45vw;
+    caret-color:red;
+    transition: width 0.4s linear;
+  }
+
+  .searchBar:hover > #searchbutton{
+    background: white;
+    color: #e74c3c;
+  }
+
+  #searchbutton{
+    height: 40px;
+    width: 40px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color:green;
+  }
+}
+
+.bg-cover {
+  background-image: url("./img/misty_mountains_by_tavenerscholar_d5opl3e-fullview.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.banner{
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 20px;
+}
+
+#text-banner {
+  opacity: 1.0;
+  color: black
+}
