@@ -33,8 +33,7 @@ export default class Card extends Component {
 			count: nextprops.data.count
 		})
 	}
-	// 
-	//
+
 	addCard(event){
 		event.preventDefault()
 		if(this.props.info){
@@ -56,7 +55,7 @@ export default class Card extends Component {
 			})
 
 		}
-		else{ 
+		else{
 			mtg.card.where({
 				id: event.target.value
 			}).then(result => {
@@ -101,7 +100,7 @@ export default class Card extends Component {
 		.catch( err => {
 			console.log(err)
 		})
-		
+
 	}
 
 	render(){
@@ -111,7 +110,7 @@ export default class Card extends Component {
 				<ClipLoader className="justify-content-md-center" css={override} sizeUnit={'px'} size={100} color={'000000'} loading={!this.state.loaded} />
 				<img className="mtg-card img-fluid" src={this.props.data.imageUrl} alt={this.props.data.name} onLoad={this.onLoaded}/>
 				<div className="card-data-middle container-fluid">
-					{this.props.info ? 
+					{this.props.info ?
 
 
 					<div className="info">

@@ -1,17 +1,38 @@
 import React, {Component} from "react";
 import "./news_app.css"
-
+import Article from "./news_article.js"
+const NewsAPi = require("newsapi")
+const newsapi = new NewsAPi(`${process.env.REACT_APP_NEWSAPI}`)
 //react-infinite-scroller
 export default class NewsSearch extends Component {
 	constructor(props){
 		super(props)
+		this.state = {
+			searchvalue: ''
+		}
 		this.handleSearch = this.handleSearch.bind(this);
+		this.searchChange = this.searchChange.bind(this);
 	}
 
 	handleSearch(event){
 		event.preventDefault()
-		console.log("a Search is being done")
+		newsapi.v2.topHeadlines({
+			q: this.state.searchvalue,
+		}).then(res => {
+			this.setState({
+				data: res
+			})
+		}).catch(err =>{
+			if(err){
+				console.log(err)
+			}
+		})
+	}
 
+	searchChange(event){
+		this.setState({
+			searchvalue: event.target.value
+		})
 	}
 
 	render(){
@@ -24,13 +45,13 @@ export default class NewsSearch extends Component {
 					<form>
 						<div className="d-flex justify-content-center h-150 mt-3">
 							<div className="searchBar">
-								<input className="searchinput" type="text" name="" placeholder="Search..."></input>
+								<input className="searchinput" type="text" name="" placeholder="Search..." onChange={this.searchChange}></input>
 								<button className="btn btn-default" type="submit" id="searchbutton"><i className="fas fa-search"></i></button>
 							</div>
 						</div>
 					</form>
 				</div>
-
+				<Article />
 			</div>
 		)
 	}
