@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
 import './app.css';
-// import ReactImage from './react.png';
 import NavigationBar from './Navbar.js'
 import Contact from './Contact.js'
 import Home from './Home.js'
@@ -10,8 +9,6 @@ import WorkoutTracker from './personal_workout_tracker/workout_app'
 import MTG from './mtg_card_collection/mtg_app'
 import News from './news_search/news_search_app'
 
-// This will be where I wil load all the project that i will code up to insert to the app
-
 export default class App extends Component {
   render() {
     return (
@@ -19,9 +16,6 @@ export default class App extends Component {
         <div>
             <NavigationBar/>
             <Switch>
-              // Using exact key word makes the components switch accurately
-              // Why does theroute need exact ??
-
                <Route exact path="/" component={Home} />
                <Route path="/about" component={About} />
                <Route path="/calculator" component={Calculator} />

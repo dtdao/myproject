@@ -13,11 +13,6 @@ let sendJSONresponse = function(res, status, content) {
   res.json(content);
 };
 
-// const unmatchedRoute = (req, res) => {
-// 	res.redirect("/")
-// }
-
-
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(cookieParser())
@@ -31,4 +26,3 @@ app.get("*", function(req, res) {
 })
 
 app.listen(process.env.PORT || 8080, () => console.log(`Listening on port ${process.env.PORT || 8080}!`));
-

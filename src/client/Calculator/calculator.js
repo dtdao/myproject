@@ -20,16 +20,14 @@ const GenerateKeys = (props) => {
 }
 
 const calculate = (modVal, storedVal, symbol) => {
-	// console.log(eval(val1+symbol+val2))
-	// val1 is store value and val2 = mod value
 	console.log(storedVal, symbol, modVal)
-	if (symbol == "\u00F7" && storedVal != 0 && modVal != 0){ 
+	if (symbol == "\u00F7" && storedVal != 0 && modVal != 0){
 		return storedVal/modVal
 	}
 	else if(symbol == "\u002A"){
 	 	return storedVal * modVal
 	}
-	else if(symbol == "\u002D") { 
+	else if(symbol == "\u002D") {
 		return (storedVal - modVal)
 	}
 	else if(symbol == "\u002B"){
@@ -155,7 +153,7 @@ export default class Calculator extends Component {
 					stored_value: total
 				}, function(){
 					console.log({stored_value: this.state.stored_value, mod_value: this.state.mod_value, display: this.state.display_value})
-				})	
+				})
 			}
 			else {
 				this.setState({
@@ -179,7 +177,7 @@ export default class Calculator extends Component {
 									<GenerateKeys value={first_row} click={this.handleClick}/>
 								</div>
 								<div className="btn-group btn-block">
-									<GenerateKeys value={second_row} click={this.handleClick}/>									
+									<GenerateKeys value={second_row} click={this.handleClick}/>
 								</div>
 								<div className="btn-group btn-block">
 									<GenerateKeys value={third_row} click={this.handleClick}/>
@@ -195,5 +193,5 @@ export default class Calculator extends Component {
 					</div>
 				</div>
 			)
-	}	
+	}
 }

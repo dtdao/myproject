@@ -9,7 +9,7 @@ const formatDate = (date) =>{
 	return d + " " + m + " " + y;
 }
 
-const GenerateData = (props) =>{ 
+const GenerateData = (props) =>{
 	return(
 		<tr>
 			<th scrope="row">{formatDate(props.data.date)}</th>
@@ -24,7 +24,6 @@ const GenerateData = (props) =>{
 const GenerateRow = (props) => {
 	let data = [];
 	for(let i = 0; i < props.data.length; i++){
-		// console.log(props.data[i].date)
 		data.push(
 				<GenerateData key={i} data={props.data[i]}/>
 			)

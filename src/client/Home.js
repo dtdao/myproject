@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import './app.css';
 
-// const inlineStyle ={color: blue}
 export default class Home extends React.Component{
 	constructor(props){
 		super(props)

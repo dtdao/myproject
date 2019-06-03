@@ -14,8 +14,6 @@ export default class NewsSearch extends Component {
 
 	}
 
-
-
 	render(){
 		return(
 			<div className="container-fluid">

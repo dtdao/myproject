@@ -14,9 +14,9 @@ const override = css`
 export default class WorkoutTracker extends Component {
 	constructor(props){
 		super(props)
-		this.state = { 
-			data: "", 
-			reload: false, 
+		this.state = {
+			data: "",
+			reload: false,
 			fetch: true
 		}
 		this.loadData = this.loadData.bind(this)
@@ -48,7 +48,6 @@ export default class WorkoutTracker extends Component {
 
 
 	render(){
-		// This is something interesting shit in workoutform.  parent rerender form child by using a callback.
 		const {data} = this.state
 		return(
 			<div className="container">
@@ -57,7 +56,7 @@ export default class WorkoutTracker extends Component {
 				</div>
 				<div className="row justify-content-sm-center">
 					<WorkoutDisplay data={data}/>
-					<ClipLoader css={override} sizeUnit={'px'} size={100} color={'000000'} loading={this.state.fetch ? this.state.fetch : this.state.reload} /> 
+					<ClipLoader css={override} sizeUnit={'px'} size={100} color={'000000'} loading={this.state.fetch ? this.state.fetch : this.state.reload} />
 				</div>
 			</div>
 		)
