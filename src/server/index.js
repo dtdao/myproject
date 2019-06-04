@@ -29,4 +29,4 @@ app.get("*", function(req, res) {
 	res.redirect("/")
 })
 
-app.listen(process.env.PORT || 8080, () => console.log(`Listening on port ${process.env.PORT || 8080}! and ${process.env.REACT_APP_NEWSAPI}`));
+app.listen(process.env.PORT || 8080, () => console.log(`Listening on port ${process.env.PORT || 8080}!`));

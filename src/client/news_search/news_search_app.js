@@ -2,8 +2,22 @@ import React, {Component} from "react";
 import "./news_app.css"
 import Article from "./news_article.js"
 const NewsAPi = require("newsapi")
-const newsapi = new NewsAPi(`${process.env.REACT_APP_NEWSAPI}`)
+//API for NewsApi goes here.
+const newsapi = new NewsAPi(``)
 //react-infinite-scroller
+
+const GenerateArticles = (prop) =>{
+	let Articles = []
+	for (let i = 0; i < prop.data.articles.length; i++){
+		Articles.push(
+			<div key={prop.data.articles[i].title}>
+				<Article data={prop.data.articles[i]} />
+			</div>
+		)
+	}
+	return Articles
+}
+
 export default class NewsSearch extends Component {
 	constructor(props){
 		super(props)
@@ -35,14 +49,15 @@ export default class NewsSearch extends Component {
 		})
 	}
 
+
 	render(){
 		return(
 			<div className="container-fluid">
-				<div className="jumbotron bg-cover" onSubmit={this.handleSearch}>
+				<div className="jumbotron bg-cover">
 					<div className="container banner h-100">
 						<p className="display-4 text-center h1" id="text-banner">Forestation</p>
 					</div>
-					<form>
+					<form onSubmit={this.handleSearch}>
 						<div className="d-flex justify-content-center h-150 mt-3">
 							<div className="searchBar">
 								<input className="searchinput" type="text" name="" placeholder="Search..." onChange={this.searchChange}></input>
@@ -51,7 +66,7 @@ export default class NewsSearch extends Component {
 						</div>
 					</form>
 				</div>
-				<Article />
+				{this.state.data ? <GenerateArticles data={this.state.data}/> : <h1 className="text-center">Search for some tinder.</h1> }
 			</div>
 		)
 	}
