@@ -3,7 +3,7 @@ import "./news_app.css"
 import Article from "./news_article.js"
 const NewsAPi = require("newsapi")
 //API for NewsApi goes here.
-const newsapi = new NewsAPi(`aab251976be24f368befbf1b693cd024`)
+const newsapi = new NewsAPi(``)
 //react-infinite-scroller
 
 const GenerateArticles = (prop) =>{
@@ -61,12 +61,12 @@ export default class NewsSearch extends Component {
 						<div className="d-flex justify-content-center h-150 mt-3">
 							<div className="searchBar">
 								<input className="searchinput" type="text" name="" placeholder="Search..." onChange={this.searchChange}></input>
-								<button className="btn btn-default" type="submit" id="searchbutton"><i className="fas fa-search"></i></button>
+								<button className="btn btn-default" type="submit" id="searchbutton"><i className="fas fa-tree"></i></button>
 							</div>
 						</div>
 					</form>
 				</div>
-				{this.state.data ? <GenerateArticles data={this.state.data}/> : <div className="text-center"><i className="fas fa-tree fa-3x"></i></div>}
+				{this.state.data ? <GenerateArticles data={this.state.data}/> : <div className="text-center"><h1>/</h1><i className="fas fa-tree fa-3x"></i><h1>/</h1></div>}
 			</div>
 		)
 	}
