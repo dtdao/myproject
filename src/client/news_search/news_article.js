@@ -8,17 +8,14 @@ export default class Article extends Component{
   }
 
   render(){
-    let bgstyle = {
-      backgroundImage: 'url('+this.props.data.urlToImage+')',
-      backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'center'
-    }
     return(
       <div className="container">
-        <div className="media border bg-light p-3" style={bgstyle}>
+        <div className="media border bg-light p-3">
+          <a href={this.props.data.url} target="_blank">
+            <img id="articleImg" className="align-self-start mr-3" src={this.props.data.urlToImage} alt="..." width="450" height="200"/>
+          </a>
           <div className="media-body">
-            <h5 className="mt-0" src={this.props.data.url}>{this.props.data.title}</h5>
+            <a className="h5 mt-0" href={this.props.data.url} target="_blank">{this.props.data.title}</a>
             <p>{this.props.data.description}</p>
           </div>
         </div>
