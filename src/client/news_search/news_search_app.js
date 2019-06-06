@@ -8,6 +8,7 @@ const newsapi = new NewsAPi(``)
 
 const GenerateArticles = (prop) =>{
 	let Articles = []
+	console.log(prop.data.totalResults)
 	for (let i = 0; i < prop.data.articles.length; i++){
 		Articles.push(
 			<div key={i}>

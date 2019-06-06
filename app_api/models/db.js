@@ -52,3 +52,4 @@ process.on('SIGTERM', function() {
 //Bring in the model
 require("./exercise.js")
 require("./mtg.js")
+require("./news.js")
