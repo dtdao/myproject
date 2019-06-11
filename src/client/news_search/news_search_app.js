@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import "./news_app.css"
 import Article from "./news_article.js"
+import MyArticle from "./my_page.js"
 const NewsAPi = require("newsapi")
 //API for NewsApi goes here.
 const newsapi = new NewsAPi(``)
@@ -8,7 +9,6 @@ const newsapi = new NewsAPi(``)
 
 const GenerateArticles = (prop) =>{
 	let Articles = []
-	console.log(prop.data.totalResults)
 	for (let i = 0; i < prop.data.articles.length; i++){
 		Articles.push(
 			<div key={i}>
@@ -23,14 +23,22 @@ export default class NewsSearch extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			searchvalue: ''
+			searchvalue: '',
+			data: [],
+			myarticles: false,
 		}
 		this.handleSearch = this.handleSearch.bind(this);
 		this.searchChange = this.searchChange.bind(this);
+		this.toggleMyPage = this.toggleMyPage.bind(this);
 	}
 
 	handleSearch(event){
 		event.preventDefault()
+		if(this.state.data){
+			this.setState({
+				data: []
+			})
+		}
 		newsapi.v2.everything({
 			q: this.state.searchvalue,
 		}).then(res => {
@@ -43,12 +51,38 @@ export default class NewsSearch extends Component {
 			}
 		})
 	}
+
+	toggleMyPage(e){
+		e.preventDefault()
+		console.log(this.state.myarticles)
+		this.setState({
+			myarticles: !this.state.myarticles
+		})
+console.log(this.state.myarticles)
+
+		if(this.state.myarticles){
+			fetch("/api/news/myarticles", {
+				method: "get",
+			}).then( (res) => {
+				return res.json()
+			}).then( data => {
+				// this.setState({
+				// 	data: data
+				// })
+				console.log(data)
+			}).catch(err => {
+				if(err){
+					console.log(err)
+				}
+			})
+		}
+	}
+
 	searchChange(event){
 		this.setState({
 			searchvalue: event.target.value
 		})
 	}
-
 
 	render(){
 		return(
@@ -66,8 +100,10 @@ export default class NewsSearch extends Component {
 							</div>
 						</div>
 					</form>
+				  <button className="btn btn-default m-1" onClick={this.toggleMyPage}>H</button>
 				</div>
-				{this.state.data ? <GenerateArticles data={this.state.data}/> : <div className="text-center"><h1>/</h1><i className="fas fa-tree fa-3x"></i><h1>/</h1></div>}
+				{this.state.data.articles ? <GenerateArticles data={this.state.data}/> : <div className="text-center"><h1>/</h1><i className="fas fa-tree fa-3x"></i><h1>/</h1></div>}
+				{this.state.myarticles ? <MyArticle /> : <h1>Hello World!</h1>}
 			</div>
 		)
 	}

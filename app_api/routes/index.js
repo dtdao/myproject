@@ -23,5 +23,6 @@ router.get("/mtg/:cardname", mtgCtrl.getCard)
 
 //router for news API
 router.post("/news/add/", newsCtrl.addArticle);
+router.get("/news/myarticles", newsCtrl.getArticles)
 
 module.exports = router

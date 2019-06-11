@@ -7,7 +7,8 @@ export default class Article extends Component{
       title: this.props.data.title,
       description :this.props.data.description,
       urlToImage: this.props.data.urlToImage,
-      url: this.props.data.url
+      url: this.props.data.url,
+      publishedAt: this.props.data.publishedAt
     }
 
     this.handleAdd = this.handleAdd.bind(this)
@@ -25,6 +26,7 @@ export default class Article extends Component{
       console.log(err)
     })
   }
+
 
   render(){
     let {title, description, urlToImage, url} = this.state

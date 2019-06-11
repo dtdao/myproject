@@ -12,6 +12,10 @@ const articleSchema = new mongoose.Schema({
   },
   url: {
     type: String
+  },
+  publishedAt: {
+    type: Date,
+    "default": Date.now
   }
 })
 

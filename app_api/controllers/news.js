@@ -24,3 +24,13 @@ module.exports.addArticle = (req, res) => {
     }
   })
 }
+
+
+module.exports.getArticles = (req, res) => {
+  Article.find({}).exec((err, data) =>{
+    if(err){
+       sendJSONresponse(res, 400, err)
+    }
+    sendJSONresponse(res, 200, data)
+  })
+}

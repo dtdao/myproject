@@ -25,10 +25,11 @@ module.exports.addNewExercise = (req, res) => {
 }
 
 module.exports.exerciseQuery = (req, res) => {
-	Exercise.find({}).sort({date: 'desc'}).exec(function(err, data) { 
+	Exercise.find({}).sort({date: 'desc'}).exec(function(err, data) {
 		if(err){
 			console.log(err)
+      sendJSONresponse(res, 400, err)
 		}
-		res.json(data)
+		sendJSONresponse(res, 200, data)
 	})
 }
