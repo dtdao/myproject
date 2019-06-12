@@ -30,6 +30,7 @@ export default class NewsSearch extends Component {
 		this.handleSearch = this.handleSearch.bind(this);
 		this.searchChange = this.searchChange.bind(this);
 		this.toggleMyPage = this.toggleMyPage.bind(this);
+
 	}
 
 	handleSearch(event){
@@ -54,28 +55,16 @@ export default class NewsSearch extends Component {
 
 	toggleMyPage(e){
 		e.preventDefault()
-		console.log(this.state.myarticles)
 		this.setState({
 			myarticles: !this.state.myarticles
 		})
-console.log(this.state.myarticles)
+	}
 
-		if(this.state.myarticles){
-			fetch("/api/news/myarticles", {
-				method: "get",
-			}).then( (res) => {
-				return res.json()
-			}).then( data => {
-				// this.setState({
-				// 	data: data
-				// })
-				console.log(data)
-			}).catch(err => {
-				if(err){
-					console.log(err)
-				}
-			})
+	shouldComponentUpdate(nextState){
+		if(nextState.data != this.state.data){
+			return true
 		}
+		return false
 	}
 
 	searchChange(event){
@@ -100,10 +89,10 @@ console.log(this.state.myarticles)
 							</div>
 						</div>
 					</form>
-				  <button className="btn btn-default m-1" onClick={this.toggleMyPage}>H</button>
+				  <button className="btn btn-default m-1" onClick={this.toggleMyPage}>My page</button>
 				</div>
-				{this.state.data.articles ? <GenerateArticles data={this.state.data}/> : <div className="text-center"><h1>/</h1><i className="fas fa-tree fa-3x"></i><h1>/</h1></div>}
-				{this.state.myarticles ? <MyArticle /> : <h1>Hello World!</h1>}
+				{this.state.data.articles && this.state.myarticles == false ? <GenerateArticles data={this.state.data}/> : <div className="text-center"><h1>/</h1><i className="fas fa-tree fa-3x"></i><h1>/</h1></div>}
+				{this.state.myarticles ? <MyArticle /> : <div></div>}
 			</div>
 		)
 	}
