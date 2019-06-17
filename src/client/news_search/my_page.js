@@ -7,11 +7,10 @@ const GenerateArticles = (prop) => {
   for(let i = 0; i < prop.data.length; i++){
     Articles.push(
       <div key={i}>
-        <Article data={prop.data[i]} />
+        <Article data={prop.data[i]}  show_remove_button={prop.db_article} reload={prop.reload}/>
       </div>
     )
   }
-
   return Articles
 }
 
@@ -19,18 +18,28 @@ export default class MyPage extends Component {
   constructor(props){
     super(props)
     this.state = {
-      myArticles: []
+      myArticles: [],
+      myArticle: true
     }
+
+    this.reload = this.reload.bind(this)
+    this.loadData = this.loadData.bind(this)
   }
 
-  componentDidMount(){
+  reload(){
+    this.loadData()
+    console.log(this.state.myArticles)
+  }
+
+  loadData(){
     fetch("/api/news/myarticles", {
       method: "get",
     }).then( (res) => {
       return res.json()
     }).then( data => {
       this.setState({
-        myArticles: data
+        myArticles: data,
+        reload: false
       })
       console.log("componnent did mount")
     }).catch(err => {
@@ -39,15 +48,19 @@ export default class MyPage extends Component {
       }
     })
   }
+
+  componentDidMount(){
+    console.log("componnent did mount")
+    this.loadData()
+  }
+
   render(){
-    console.log(this.state.myArticles[0])
     if(this.state.myArticles.length == 0){
       return <h1>Loading..</h1>
     }
     return(
       <div className="container-fluid">
-        <GenerateArticles data={this.state.myArticles} />
-        <h2>This is where you can see your stored articles to read later on.</h2>
+        <GenerateArticles data={this.state.myArticles} db_article={this.state.myArticle} reload={this.reload}/>
       </div>
     )
   }

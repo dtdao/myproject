@@ -34,3 +34,14 @@ module.exports.getArticles = (req, res) => {
     sendJSONresponse(res, 200, data)
   })
 }
+
+module.exports.removeArticle = (req, res) => {
+  Article.findOneAndDelete({_id: req.params.articleid }, (err, article) => {
+    if(err){
+      sendJSONresponse(res, 400, err)
+    }
+    else {
+      sendJSONresponse(res, 200, article)
+    }
+  })
+}

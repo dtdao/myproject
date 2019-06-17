@@ -48,6 +48,7 @@ export default class WorkoutTracker extends Component {
 
 
 	render(){
+		let me = "hello"
 		const {data} = this.state
 		return(
 			<div className="container">

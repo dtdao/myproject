@@ -3,9 +3,17 @@ import "./news_app.css"
 import Article from "./news_article.js"
 import MyArticle from "./my_page.js"
 const NewsAPi = require("newsapi")
+import {ClipLoader} from 'react-spinners';
+import {css} from '@emotion/core';
 //API for NewsApi goes here.
 const newsapi = new NewsAPi(``)
 //react-infinite-scroller
+
+const override = css`
+	display: block;
+	margin: 0 auto;
+	border-color: black;
+`
 
 const GenerateArticles = (prop) =>{
 	let Articles = []
@@ -26,6 +34,7 @@ export default class NewsSearch extends Component {
 			searchvalue: '',
 			data: [],
 			myarticles: false,
+			loading: false,
 		}
 		this.handleSearch = this.handleSearch.bind(this);
 		this.searchChange = this.searchChange.bind(this);
@@ -35,6 +44,9 @@ export default class NewsSearch extends Component {
 
 	handleSearch(event){
 		event.preventDefault()
+		this.setState({
+			loading: true,
+		})
 		if(this.state.data){
 			this.setState({
 				data: []
@@ -44,7 +56,8 @@ export default class NewsSearch extends Component {
 			q: this.state.searchvalue,
 		}).then(res => {
 			this.setState({
-				data: res
+				data: res,
+				loading: false,
 			})
 		}).catch(err =>{
 			if(err){
@@ -56,6 +69,7 @@ export default class NewsSearch extends Component {
 	toggleMyPage(e){
 		e.preventDefault()
 		this.setState({
+			data: [],
 			myarticles: !this.state.myarticles
 		})
 	}
@@ -89,10 +103,11 @@ export default class NewsSearch extends Component {
 							</div>
 						</div>
 					</form>
-				  <button className="btn btn-default m-1" onClick={this.toggleMyPage}>My page</button>
+				  <button className={"btn m-1" + (this.state.myarticles ? " btn-primary" : " btn-danger")} onClick={this.toggleMyPage}>{this.state.myarticles ? <span>Go Explore</span> : <span>My Forest</span>}</button>
 				</div>
-				{this.state.data.articles && this.state.myarticles == false ? <GenerateArticles data={this.state.data}/> : <div className="text-center"><h1>/</h1><i className="fas fa-tree fa-3x"></i><h1>/</h1></div>}
-				{this.state.myarticles ? <MyArticle /> : <div></div>}
+				{this.state.data.articles && this.state.myarticles == false ? <GenerateArticles data={this.state.data}/ > : <div className="text-center"><ClipLoader css={override} sizeUnit={'px'} size={100} color={'000000'} loading={this.state.loading} /></div>}
+				{this.state.myarticles ? <MyArticle /> : null}
+				<div className="text-center m-3 "><i className="fas fa-tree fa-3x"></i></div>
 			</div>
 		)
 	}

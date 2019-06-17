@@ -24,7 +24,7 @@ module.exports.addNewCard = (req, res) =>{
 
 	Card.findOneAndUpdate({
 		id: req.body.id
-	}, newCard, {upsert: true}, (err, doc) =>{ 
+	}, newCard, {upsert: true}, (err, doc) =>{
 		if(err){
 			console.log(err);
 			sendJSONresponse(res, 400, err)
@@ -81,6 +81,7 @@ module.exports.getCard = (req, res) =>{
 		})
 	}
 	else {
+    console.log(req.params.cardname)
 		Card.find({$text: {$search: req.params.cardname}}, (err, cards) =>{
 			if(err){
 				console.log(err)
@@ -91,4 +92,4 @@ module.exports.getCard = (req, res) =>{
 			}
 		})
 	}
-} 
+}
