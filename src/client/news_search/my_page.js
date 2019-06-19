@@ -7,7 +7,7 @@ const GenerateArticles = (prop) => {
   for(let i = 0; i < prop.data.length; i++){
     Articles.push(
       <div key={i}>
-        <Article data={prop.data[i]}  show_remove_button={prop.db_article} reload={prop.reload}/>
+        <Article data={prop.data[i]}  db_button={prop.db_article} remove_article={prop.remove}/>
       </div>
     )
   }
@@ -22,13 +22,8 @@ export default class MyPage extends Component {
       myArticle: true
     }
 
-    this.reload = this.reload.bind(this)
     this.loadData = this.loadData.bind(this)
-  }
-
-  reload(){
-    this.loadData()
-    console.log(this.state.myArticles)
+    this.removeArticle = this.removeArticle.bind(this)
   }
 
   loadData(){
@@ -41,7 +36,6 @@ export default class MyPage extends Component {
         myArticles: data,
         reload: false
       })
-      console.log("componnent did mount")
     }).catch(err => {
       if(err){
         console.log(err)
@@ -49,18 +43,53 @@ export default class MyPage extends Component {
     })
   }
 
-  componentDidMount(){
-    console.log("componnent did mount")
+  removeArticle(item_id){
+    fetch("/api/news/myarticles/remove/" + item_id, {
+      method: "put",
+      headers: {"Content-Type": "application/json"}
+    }).then( (res)=> {
+      console.log("removed article: " +item_id + " from database")
+      return res.json()
+    }).then( article => {
+      console.log(article)
+      if(article == null){
+        this.setState({
+          myArticles: this.state.myArticles
+        })
+      }
+    }).catch(err=>{
+      if(err){
+        console.log(err)
+      }
+    })
+    // let articles = this.state.myArticles;
+    // for(let i = 0; i < articles.length; i++){
+    //   if(articles[i]._id == item_id){
+    //     articles.splice(i, 1)
+    //   }
+    // }
+    //
+    // this.setState({
+    //   myArticles: articles
+    // })
+
+    // console.log(this.state.myArticles)
     this.loadData()
   }
 
+  componentDidMount(){
+    this.loadData()
+  }
+
+
   render(){
+    console.log(this.state.myArticles)
     if(this.state.myArticles.length == 0){
-      return <h1>Loading..</h1>
+      return <h1 className="text-center">{`There are no trees here for you.  You can always search and add \n more!`}</h1>
     }
     return(
       <div className="container-fluid">
-        <GenerateArticles data={this.state.myArticles} db_article={this.state.myArticle} reload={this.reload}/>
+        <GenerateArticles data={this.state.myArticles} db_article={this.state.myArticle} remove={this.removeArticle}/>
       </div>
     )
   }

@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
+const uniqueValidator = require("mongoose-unique-validator")
 
 const articleSchema = new mongoose.Schema({
   title: {
-    type: String
+    type: String,
+    unique: true
   },
   description: {
     type: String
@@ -19,4 +21,5 @@ const articleSchema = new mongoose.Schema({
   }
 })
 
+articleSchema.plugin(uniqueValidator)
 mongoose.model("Article", articleSchema)

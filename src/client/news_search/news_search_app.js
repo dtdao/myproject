@@ -5,6 +5,7 @@ import MyArticle from "./my_page.js"
 const NewsAPi = require("newsapi")
 import {ClipLoader} from 'react-spinners';
 import {css} from '@emotion/core';
+import InfiniteScroll from "react-infinite-scroller";
 //API for NewsApi goes here.
 const newsapi = new NewsAPi(``)
 //react-infinite-scroller
@@ -35,10 +36,12 @@ export default class NewsSearch extends Component {
 			data: [],
 			myarticles: false,
 			loading: false,
+			page: 1
 		}
 		this.handleSearch = this.handleSearch.bind(this);
 		this.searchChange = this.searchChange.bind(this);
 		this.toggleMyPage = this.toggleMyPage.bind(this);
+		this.moreItems = this.moreItems.bind(this);
 
 	}
 
@@ -54,6 +57,8 @@ export default class NewsSearch extends Component {
 		}
 		newsapi.v2.everything({
 			q: this.state.searchvalue,
+			pageSize: 10,
+			page: this.state.page
 		}).then(res => {
 			this.setState({
 				data: res,
@@ -87,7 +92,25 @@ export default class NewsSearch extends Component {
 		})
 	}
 
+	moreItems(page){
+		newsapi.v2.everything({
+			q: this.state.searchValue,
+			pageSize: 10,
+			page: page
+		}).then(res => {
+			let articles = this.state.myArticles;
+			res.forEach( article => {
+				articles.push(article)
+			})
+			this.setState({
+				myArticles: articles,
+				page: this.state.page++
+			})
+		})
+	}
+
 	render(){
+		//Make thetree icon load more articles.
 		return(
 			<div className="container-fluid">
 				<div className="jumbotron bg-cover">

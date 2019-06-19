@@ -31,18 +31,7 @@ export default class Article extends Component{
 
   handleRemove(event){
     event.preventDefault()
-    fetch("/api/news/myarticles/remove/" + this.state.id, {
-      method: "put",
-      headers: {"Content-Type": "application/json"}
-    }).then( (res)=> {
-      console.log("removed " + this.state.title + "from database")
-      return res.json()
-    }).catch(err=>{
-      if(err){
-        console.log(err)
-      }
-    })
-    this.props.reload()
+    this.props.remove_article(this.state.id);
   }
 
 
@@ -59,8 +48,8 @@ export default class Article extends Component{
             <p className="media-description">{description}</p>
           </div>
           <ul className="list-group list-group-horizontal-sm">
-            <a href="..."  onClick={this.handleAdd}><i className="fas fa-plus-circle m-1 fa-lg"></i></a>
-            {this.props.show_remove_button ? <a href="..."  onClick={this.handleRemove}><i className="fas fa-minus-circle m-1 fa-lg"></i></a> : null}
+            {this.props.db_button ? null : <a href="..."  onClick={this.handleAdd}><i className="fas fa-plus-circle m-1 fa-lg"></i></a> }
+            {this.props.db_button ? <a href="..."  onClick={this.handleRemove}><i className="fas fa-minus-circle m-1 fa-lg"></i></a> : null}
           </ul>
         </div>
       </div>
