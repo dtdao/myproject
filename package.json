@@ -21,7 +21,7 @@
     "helmet": "^3.18.0",
     "loaders.css": "^0.1.2",
     "mongodb": "^3.2.7",
-    "mongoose": "^5.6.4",
+    "mongoose": "^5.7.5",
     "mongoose-unique-validator": "^2.0.3",
     "mtgsdk": "^0.4.3",
     "newsapi": "^2.4.0",
