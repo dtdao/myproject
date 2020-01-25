@@ -22,7 +22,7 @@ app.use(cookieParser())
 
 app.use(express.static('dist'));
 app.use('/api', routesApi)
-
+console.log("this is a test of sshit");
 
 //testing new stuff
 app.get("*", function(req, res) {
